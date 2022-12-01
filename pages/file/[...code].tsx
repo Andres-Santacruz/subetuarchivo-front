@@ -261,7 +261,7 @@ export const getServerSideProps: GetServerSideProps<IRes | IRedirect> = async ({
   }
 
   const url = typeof code === "object" ? code.join("/") : code;
-  const bytes = CryptoJS.AES.decrypt(url, "fcbarcelona");
+  const bytes = CryptoJS.AES.decrypt(url, process.env.SECRET_KEY as string);
   const originalText = bytes.toString(CryptoJS.enc.Utf8);
 
   if (originalText === "") {
