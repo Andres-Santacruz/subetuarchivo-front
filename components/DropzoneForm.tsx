@@ -1,6 +1,6 @@
 import { Box, Button, useToast } from "@chakra-ui/react";
 import React, {SetStateAction, useEffect, useMemo} from "react";
-import { useDropzone } from "react-dropzone";
+import { DropzoneRootProps, useDropzone } from "react-dropzone";
 
 const baseStyle = {
   flex: 1,
@@ -74,7 +74,7 @@ export function DropzoneForm({
     }
   }, [acceptedFiles, setFilesUploaded, toast]);
 
-  const style = useMemo(
+  const style: DropzoneRootProps = useMemo(
     () => ({
       ...baseStyle,
       ...(isFocused ? focusedStyle : {}),
