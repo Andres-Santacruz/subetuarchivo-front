@@ -29,7 +29,6 @@ type Prop = {
 };
 
 const ReadFilePage = ({ data, code, status }: Prop) => {
-  console.log("data --->", data);
 
   const FILES = data.map((url) => {
     const name = url.split("__")[1];
@@ -252,7 +251,6 @@ export const getServerSideProps: GetServerSideProps<IRes | IRedirect> = async ({
   query,
 }) => {
   const { code } = query;
-  console.log("code code: ", code);
   if (!code) {
     return {
       redirect: {
@@ -265,7 +263,6 @@ export const getServerSideProps: GetServerSideProps<IRes | IRedirect> = async ({
   const url = typeof code === "object" ? code.join("/") : code;
   const bytes = CryptoJS.AES.decrypt(url, "fcbarcelona");
   const originalText = bytes.toString(CryptoJS.enc.Utf8);
-  console.log("esto s codeId:   ", originalText);
 
   if (originalText === "") {
     return {
@@ -298,7 +295,6 @@ export const getServerSideProps: GetServerSideProps<IRes | IRedirect> = async ({
   );
 
   if (!success || !urls) {
-    console.log("Error", message);
 
     return {
       props: {

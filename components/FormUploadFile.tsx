@@ -145,13 +145,10 @@ export const FormUploadFile = ({
   };
 
   useEffect(() => {
-    console.log("data otp", data);
     if(data){
       if (data.success) {
         setIsModalOpen(true);
       } else if (!data.success) {
-        console.log("error erorr", error);
-        console.log("error otp", data.message);
         toast({
           title: "No se pudo crear codigo OTP",
           description: data.message ,
@@ -164,7 +161,6 @@ export const FormUploadFile = ({
   }, [data, error, toast]);
 
   useEffect(() => {
-    console.log('dataUpload', dataUpload);
     if(dataUpload){
       if (dataUpload.success && dataUpload.info) {
         setCodeReady(dataUpload.info); // rta code finish

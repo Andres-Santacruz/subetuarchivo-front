@@ -68,7 +68,6 @@ export const useUploadFile = (): [(data: IData) => Promise<void>, IUseUpload] =>
         password: config?.password,
         time: config?.time
       });
-      console.log('res aqui dentro', res)
       setData(res);
       setLoading(false);
       if(!res.success){

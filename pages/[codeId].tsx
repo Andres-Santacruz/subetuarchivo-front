@@ -4,7 +4,6 @@ import Content from "../components/Content";
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const { codeId } = query;
 
-  console.log("esto s codeId:   ", codeId);
 
   if (typeof codeId === "string" && !/^[A-Za-z0-9]*$/.test(codeId)) {
     return {

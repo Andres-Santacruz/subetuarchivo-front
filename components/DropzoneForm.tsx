@@ -52,7 +52,6 @@ export function DropzoneForm({
   const toast = useToast();
 
   useEffect(() => {
-    // console.log('aceepeee', acceptedFiles)
     setFilesUploaded((pre) => {
 
       const someFile =  pre.some(

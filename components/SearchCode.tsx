@@ -89,7 +89,6 @@ export const SearchCode = (): JSX.Element => {
 
     if (code.length === 6) {
       const url = AES.encrypt(code, "fcbarcelona").toString();
-      console.log("url:    ", url);
       router.push(`/file/${url}`);
     }
   };

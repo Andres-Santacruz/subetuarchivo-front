@@ -113,7 +113,5 @@ export const axiosUseUploadFile = async ({
     },
   });
 
-  console.log('data -->', data)
-
   return { ...data };
 };

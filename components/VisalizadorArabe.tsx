@@ -2,7 +2,6 @@ import { Image } from "@chakra-ui/react";
 
 const BASE_URL = "https://view.officeapps.live.com/op/embed.aspx?src=";
 const VisalizadorArabe = ({ file, name }: { file: string; name: string }) => {
-  console.log("ultimos: ", name.slice(name.length - 3));
 
   const ext = name.slice(name.length - 4).toLowerCase();
   if (name === "" || name === null || name === undefined) {
