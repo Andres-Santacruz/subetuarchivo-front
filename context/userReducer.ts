@@ -8,7 +8,7 @@ type actionType =
   | { type: "notAutenticated" };
 
 
-export const userReducer = (state: AuthStateProp, action: actionType ) => {
+export const userReducer = (state: AuthStateProp, action: actionType ): AuthStateProp => {
   switch (action.type) {
     case 'signIn':
       return {
@@ -18,6 +18,20 @@ export const userReducer = (state: AuthStateProp, action: actionType ) => {
         status: "autenticated",
         errorMessage: "",
       };
+    case "notAutenticated":
+    case "logOut":
+      return {
+        ...state,
+        token: null,
+        user: null,
+        errorMessage: "",
+        status: "not-autenticated",
+      }
+    case "error": 
+    return {
+      ...state,
+      errorMessage: action.payload
+    }
     default:
       return state
   }
