@@ -1,8 +1,9 @@
+import Link from "next/link";
 import {
   Box,
   Button,
   Container,
-  Link,
+  Link as LinkChakra,
   SimpleGrid,
   Stack,
   Text,
@@ -60,35 +61,60 @@ const Footer = () => {
       <Container as={Stack} maxW={"6xl"} py={10}>
         <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing={8}>
           <Stack align={"flex-start"}>
-            <ListHeader>Company</ListHeader>
-            <Link href={"#"}>About Us</Link>
-            <Link href={"#"}>Blog</Link>
-            <Link href={"#"}>Careers</Link>
-            <Link href={"#"}>Contact Us</Link>
+            <ListHeader>Compañia</ListHeader>
+            <Link href="/info/aboutus" passHref>
+              <LinkChakra
+                role={"group"}
+                display={"block"}
+                p={2}
+                _hover={{ textDecoration: "underline" }}
+              >
+                Nostros
+              </LinkChakra>
+            </Link>
+            <Link href="/info/pricing" passHref>
+              <LinkChakra
+                role={"group"}
+                display={"block"}
+                p={2}
+                _hover={{ textDecoration: "underline" }}
+              >
+                Tarifas
+              </LinkChakra>
+            </Link>
           </Stack>
 
-          <Stack align={"flex-start"}>
+          {/*           <Stack align={"flex-start"}>
             <ListHeader>Support</ListHeader>
             <Link href={"#"}>Help Center</Link>
             <Link href={"#"}>Safety Center</Link>
             <Link href={"#"}>Community Guidelines</Link>
-          </Stack>
+          </Stack> */}
 
           <Stack align={"flex-start"}>
             <ListHeader>Legal</ListHeader>
-            <Link href={"#"}>Cookies Policy</Link>
+            <Link href="/legal/terms" passHref>
+              <LinkChakra
+                role={"group"}
+                display={"block"}
+                p={2}
+                _hover={{ textDecoration: "underline" }}
+              >
+                Términos y servicios
+              </LinkChakra>
+            </Link>
+            {/*             <Link href={"#"}>Cookies Policy</Link>
             <Link href={"#"}>Privacy Policy</Link>
-            <Link href={"#"}>Terms of Service</Link>
-            <Link href={"#"}>Law Enforcement</Link>
+            <Link href={"#"}>Law Enforcement</Link> */}
           </Stack>
 
-          <Stack align={"flex-start"}>
+          {/*          <Stack align={"flex-start"}>
             <ListHeader>Install App</ListHeader>
             <p>
               AppStoreBadge <br />
               PlayStoreBadge
             </p>
-          </Stack>
+          </Stack> */}
         </SimpleGrid>
       </Container>
 
@@ -106,8 +132,8 @@ const Footer = () => {
           justify={{ md: "space-between" }}
           align={{ md: "center" }}
         >
-          <Text>© 2022 Chakra Templates. All rights reserved</Text>
-          <Stack direction={"row"} spacing={6}>
+          <Text>© 2022 Subetuarchivo. Todos los derechos reservados</Text>
+          {/* <Stack direction={"row"} spacing={6}>
             <SocialButton label={"Twitter"} href={"#"}>
               Tw
             </SocialButton>
@@ -117,7 +143,7 @@ const Footer = () => {
             <SocialButton label={"Instagram"} href={"#"}>
               Ig
             </SocialButton>
-          </Stack>
+          </Stack> */}
         </Container>
       </Box>
     </Box>
