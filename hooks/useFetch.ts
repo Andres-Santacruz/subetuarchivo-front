@@ -1,5 +1,9 @@
 import { useCallback, useState } from "react";
-import { axiosUseGenerateOtp, axiosUseUploadFile } from "../api/axiosRequests";
+import {
+  axiosUseGenerateOtp,
+  axiosUseLogin,
+  axiosUseUploadFile,
+} from "../api/axiosRequests";
 
 interface IDataGenOtp {
   message: string;
@@ -33,7 +37,30 @@ interface IData {
   config?: IConfig | undefined;
 }
 
-export const useGenerateOtp = (): [(email: string) => Promise<void>, IUseGenOtp] => {
+interface IDataLogin {
+  email: string;
+  password: string;
+}
+interface IUserLogin {
+  token: string;
+  email: string;
+  name: string;
+}
+interface IDataLoginRes {
+  message: string;
+  user: IUserLogin | null;
+  success: boolean;
+}
+interface IUseLogin {
+  data: IDataLoginRes | null;
+  loading: boolean;
+  error: unknown;
+}
+
+export const useGenerateOtp = (): [
+  (email: string) => Promise<void>,
+  IUseGenOtp
+] => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<IDataGenOtp | null>(null);
   const [error, setError] = useState<unknown>(null);
@@ -52,29 +79,53 @@ export const useGenerateOtp = (): [(email: string) => Promise<void>, IUseGenOtp]
   return [generateOtp, { data, loading, error }];
 };
 
-export const useUploadFile = (): [(data: IData) => Promise<void>, IUseUpload] => {
+export const useUploadFile = (): [
+  (data: IData) => Promise<void>,
+  IUseUpload
+] => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<IDataUpload | null>(null);
   const [error, setError] = useState<unknown>(null);
 
   const uploadFile = useCallback(async (data: IData) => {
-    const {email, files, validationId, config} = data
+    const { email, files, validationId, config } = data;
 
-      setLoading(true);
-      const res = await axiosUseUploadFile({
-        email,
-        files,
-        otpVerify: validationId.toString(),
-        password: config?.password,
-        time: config?.time
-      });
-      setData(res);
-      setLoading(false);
-      if(!res.success){
-        setError(res);
-      }
-    
+    setLoading(true);
+    const res = await axiosUseUploadFile({
+      email,
+      files,
+      otpVerify: validationId.toString(),
+      password: config?.password,
+      time: config?.time,
+    });
+    setData(res);
+    setLoading(false);
+    if (!res.success) {
+      setError(res);
+    }
   }, []);
 
   return [uploadFile, { data, loading, error }];
+};
+
+export const useLogin = (): [
+  (data: IDataLogin) => Promise<void>,
+  IUseLogin
+] => {
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState<IDataLoginRes | null>(null);
+  const [error, setError] = useState<unknown>(null);
+
+  const login = useCallback(async ({ email, password }: IDataLogin) => {
+    try {
+      setLoading(true);
+      const res = await axiosUseLogin({ email, password });
+      setLoading(false);
+      setData(res);
+    } catch (error) {
+      setError(error);
+    }
+  }, []);
+
+  return [login, { data, error, loading }];
 };
