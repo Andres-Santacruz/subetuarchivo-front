@@ -2,7 +2,6 @@ import React, { createContext, useReducer } from "react";
 import {
   AuthContextProp,
   AuthStateProp,
-  ILoginData,
   ISignInProps,
 } from "../constant/types/interfaces";
 import { userReducer } from "./userReducer";
@@ -10,6 +9,8 @@ import { userReducer } from "./userReducer";
 const userInitialState: AuthStateProp = {
   token: null,
   user: null,
+  errorMessage: "",
+  status: "not-autenticated"
 };
 
 export const AuthContext = createContext({} as AuthContextProp);
@@ -24,10 +25,18 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         user,
       },
     });
+    if(typeof window !== "undefined"){
+      localStorage.setItem('token', token);
+      localStorage.setItem('user', JSON.stringify(user));
+    }
   };
 
   const logOut = async () => {
     dispatch({ type: "logOut" });
+    if(typeof window !== "undefined"){
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+    }
   };
 
   const removeError = () => {

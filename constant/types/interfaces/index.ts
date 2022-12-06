@@ -79,14 +79,14 @@ export interface AuthContextProp {
   signIn: (signInData: ISignInProps) => void;
   logOut: () => void;
   removeError: () => void;
+  status: "autenticated" | "not-autenticated" | "checking";
+  errorMessage: string;
 }
 
 export interface IUsuario {
-  name?: string;
-  /*   email: string;
-  uid: string;
-  img?: string;
-  lastname?: string; */
+  token: string;
+  email: string;
+  name: string;
 }
 
 export interface ILoginData {
@@ -97,6 +97,8 @@ export interface ILoginData {
 export interface AuthStateProp {
   token: string | null;
   user: IUsuario | null;
+  status: "autenticated" | "not-autenticated" | "checking";
+  errorMessage: string;
 };
 
 export interface ISignInProps {
