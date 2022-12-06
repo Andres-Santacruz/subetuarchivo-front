@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { useRouter } from "next/router";
 import {
   Box,
   Stack,
@@ -26,6 +27,7 @@ function PriceWrapper({ children }: { children: ReactNode }) {
       alignSelf={{ base: "center", lg: "flex-start" }}
       borderColor={useColorModeValue("gray.200", "gray.500")}
       borderRadius={"xl"}
+      maxWidth={"xs"}
     >
       {children}
     </Box>
@@ -33,15 +35,15 @@ function PriceWrapper({ children }: { children: ReactNode }) {
 }
 
 export default function Pricing() {
+const router = useRouter();
   return (
     <Container maxW={"7xl"} my={10} backgroundColor="white" borderRadius="xl">
       <VStack mt={20} spacing={2} textAlign="center">
         <Heading as="h1" fontSize="4xl">
-          Plans that fit your need
+          El plan perfecto para ti
         </Heading>
         <Text fontSize="lg" color={"gray.500"}>
-          Start with 14-day free trial. No credit card needed. Cancel at
-          anytime.
+          Empieza totalmente gratis, sube y comparte tus archivos.
         </Text>
       </VStack>
       <Stack
@@ -54,17 +56,17 @@ export default function Pricing() {
         <PriceWrapper>
           <Box py={4} px={12}>
             <Text fontWeight="500" fontSize="2xl">
-              Hobby
+              FREE
             </Text>
             <HStack justifyContent="center">
               <Text fontSize="3xl" fontWeight="600">
                 $
               </Text>
               <Text fontSize="5xl" fontWeight="900">
-                79
+                0
               </Text>
               <Text fontSize="3xl" color="gray.500">
-                /month
+                /mensual
               </Text>
             </HStack>
           </Box>
@@ -76,20 +78,20 @@ export default function Pricing() {
             <List spacing={3} textAlign="start" px={12}>
               <ListItem>
                 <ListIcon as={CheckCircle} color="green.500" />
-                unlimited build minutes
+                Comparte tus archivos.
+              </ListItem>
+              <ListItem>
+                <ListIcon as={CheckCircle} color="green.500" />1 día de acceso a
+                tus archivos.
               </ListItem>
               <ListItem>
                 <ListIcon as={CheckCircle} color="green.500" />
-                Lorem, ipsum dolor.
-              </ListItem>
-              <ListItem>
-                <ListIcon as={CheckCircle} color="green.500" />
-                5TB Lorem, ipsum dolor.
+                5M para compartir tus archivos sin registrarte.
               </ListItem>
             </List>
             <Box w="80%" pt={7}>
-              <Button w="full" colorScheme="red" variant="outline">
-                Start trial
+              <Button w="full" colorScheme="red" variant="outline" onClick={()=>router.push('/')}>
+                Probar ahora
               </Button>
             </Box>
           </VStack>
@@ -113,22 +115,22 @@ export default function Pricing() {
                 fontWeight="600"
                 rounded="xl"
               >
-                Most Popular
+                Más popular
               </Text>
             </Box>
             <Box py={4} px={12}>
               <Text fontWeight="500" fontSize="2xl">
-                Growth
+                Registrarte
               </Text>
               <HStack justifyContent="center">
                 <Text fontSize="3xl" fontWeight="600">
                   $
                 </Text>
                 <Text fontSize="5xl" fontWeight="900">
-                  149
+                  0
                 </Text>
                 <Text fontSize="3xl" color="gray.500">
-                  /month
+                  /mensual
                 </Text>
               </HStack>
             </Box>
@@ -140,47 +142,48 @@ export default function Pricing() {
               <List spacing={3} textAlign="start" px={12}>
                 <ListItem>
                   <ListIcon as={CheckCircle} color="green.500" />
-                  unlimited build minutes
+                  Comparte archivos cuantas veces quieras.
                 </ListItem>
                 <ListItem>
                   <ListIcon as={CheckCircle} color="green.500" />
-                  Lorem, ipsum dolor.
+                  Hasta 7 día de acceso a tus archivos.
                 </ListItem>
                 <ListItem>
                   <ListIcon as={CheckCircle} color="green.500" />
-                  5TB Lorem, ipsum dolor.
+                  10M para compartir tus archivos sin registrarte.
                 </ListItem>
                 <ListItem>
                   <ListIcon as={CheckCircle} color="green.500" />
-                  5TB Lorem, ipsum dolor.
+                  Añade clave privada a tus archivos.
                 </ListItem>
                 <ListItem>
                   <ListIcon as={CheckCircle} color="green.500" />
-                  5TB Lorem, ipsum dolor.
+                  Agrega configuración adicional a tu archivo.
                 </ListItem>
               </List>
               <Box w="80%" pt={7}>
                 <Button w="full" colorScheme="red">
-                  Start trial
+                  Probar ahora
                 </Button>
               </Box>
             </VStack>
           </Box>
         </PriceWrapper>
+
         <PriceWrapper>
           <Box py={4} px={12}>
             <Text fontWeight="500" fontSize="2xl">
-              Scale
+              Premium
             </Text>
             <HStack justifyContent="center">
               <Text fontSize="3xl" fontWeight="600">
                 $
               </Text>
               <Text fontSize="5xl" fontWeight="900">
-                349
+                2
               </Text>
               <Text fontSize="3xl" color="gray.500">
-                /month
+                /mensual
               </Text>
             </HStack>
           </Box>
@@ -192,20 +195,32 @@ export default function Pricing() {
             <List spacing={3} textAlign="start" px={12}>
               <ListItem>
                 <ListIcon as={CheckCircle} color="green.500" />
-                unlimited build minutes
+                Comparte archivos cuantas veces quieras.
               </ListItem>
               <ListItem>
                 <ListIcon as={CheckCircle} color="green.500" />
-                Lorem, ipsum dolor.
+                Hasta 1 mes de acceso a tus archivos.
               </ListItem>
               <ListItem>
                 <ListIcon as={CheckCircle} color="green.500" />
-                5TB Lorem, ipsum dolor.
+                10G para compartir tus archivos sin registrarte.
+              </ListItem>
+              <ListItem>
+                <ListIcon as={CheckCircle} color="green.500" />
+                Añade clave privada a tus archivos.
+              </ListItem>
+              <ListItem>
+                <ListIcon as={CheckCircle} color="green.500" />
+                Agrega configuración adicional a tu archivo.
+              </ListItem>
+              <ListItem>
+                <ListIcon as={CheckCircle} color="green.500" />
+                Accede a archivos vencidos
               </ListItem>
             </List>
             <Box w="80%" pt={7}>
               <Button w="full" colorScheme="red" variant="outline">
-                Start trial
+                Probar ahora
               </Button>
             </Box>
           </VStack>
