@@ -2,6 +2,7 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
   CloseIcon,
+  DeleteIcon,
   HamburgerIcon,
 } from "@chakra-ui/icons";
 import {
@@ -14,7 +15,6 @@ import {
   Stack,
   Text,
   Link as LinkChakra,
-  useBreakpointValue,
   useColorModeValue,
   Menu,
   MenuButton,
@@ -240,9 +240,13 @@ const MobileNav = () => {
 };
 
 const Header = () => {
-  const { user } = useAuth();
+  const { user, logOut } = useAuth();
   const { isOpen, onToggle } = useDisclosure();
   const router = useRouter();
+
+  const handleLogout = () => {
+    logOut();
+  };
 
   return (
     <Box>
@@ -305,18 +309,11 @@ const Header = () => {
                   cursor={"pointer"}
                   minW={0}
                 >
-                  <Avatar
-                    size="sm"
-                    src={
-                      "https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9"
-                    }
-                  />
+                  <Avatar size="sm" src={"/assets/imgs/varios/usuario.png"} />
                 </MenuButton>
                 <MenuList>
-                  <MenuItem>Link 1</MenuItem>
-                  <MenuItem>Link 2</MenuItem>
-                  <MenuDivider />
-                  <MenuItem>Link 3</MenuItem>
+                  {/* <MenuDivider /> */}
+                  <MenuItem color="blue.300" display="flex" justifyContent="space-between" onClick={handleLogout}>Salir {" "} <DeleteIcon color="blue.300" /></MenuItem>
                 </MenuList>
               </Menu>
             ) : (
