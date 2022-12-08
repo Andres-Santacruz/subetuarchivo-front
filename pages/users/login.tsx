@@ -172,7 +172,11 @@ const Login = () => {
                 justify={"space-between"}
               >
                 <Checkbox>Recuerdame</Checkbox>
-                <LinkChakra color={"blue.400"}>¿Olvido su contraseña?</LinkChakra>
+                <Link href="/users/reset-password" passHref>
+                  <LinkChakra color={"blue.400"}>
+                    ¿Olvido su contraseña?
+                  </LinkChakra>
+                </Link>
               </Stack>
               <Button
                 bg={"blue.400"}
@@ -180,7 +184,7 @@ const Login = () => {
                 _hover={{
                   bg: "blue.500",
                 }}
-                disabled={!isOkButton}
+                disabled={!isOkButton || loading}
                 onClick={handleSubmit}
                 isLoading={loading}
               >
