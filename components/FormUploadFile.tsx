@@ -45,6 +45,7 @@ import {
 /* import { UPLOAD_FILES } from "../constant/graphql/mutations";
 import { IResponseUpload } from "../constant/types/interfaces"; */
 import { emailRegex } from "../helpers";
+import { useAuth } from "../hooks/useAuth";
 import { useGenerateOtp, useUploadFile } from "../hooks/useFetch";
 import { DrawerConfig } from "./DrawerConfig";
 import { DropzoneForm } from "./DropzoneForm";
@@ -89,6 +90,7 @@ export const FormUploadFile = ({
   setCodeReady: React.Dispatch<SetStateAction<string | undefined>>;
   codeReady: string | undefined;
 }): JSX.Element => {
+  const {user} = useAuth();
   const [generateOtp, { data, loading, error }] = useGenerateOtp();
   
   /* const [
@@ -119,6 +121,17 @@ export const FormUploadFile = ({
   const [config, setConfig] = useState<IConfig>({});
 
   const [isOkButton, setIsOkButton] = useState(false);
+
+  useEffect(() => {
+    
+    if(user){
+      setEmail(user.email);
+    }else{
+      setEmail("");
+    }
+    
+  }, [user])
+  
 
   const isValidEmail = useMemo(() => {
     if (email === "") return true;
@@ -252,7 +265,7 @@ export const FormUploadFile = ({
           </Text>
         </Stack>
 
-        <FormControl isRequired isInvalid={!isValidEmail}>
+        <FormControl isRequired isInvalid={!isValidEmail} isDisabled={Boolean(user)}>
           <FormLabel>Correo electrónico</FormLabel>
           <Input
             type="email"
