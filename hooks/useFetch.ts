@@ -1,7 +1,10 @@
 import { useCallback, useState } from "react";
 import {
+  axiosGenLinkResetPass,
+  axiosResetPassword,
   axiosUseGenerateOtp,
   axiosUseLogin,
+  axiosUseRegister,
   axiosUseUploadFile,
 } from "../api/axiosRequests";
 
@@ -53,6 +56,54 @@ interface IDataLoginRes {
 }
 interface IUseLogin {
   data: IDataLoginRes | null;
+  loading: boolean;
+  error: unknown;
+}
+
+interface IDataRegister {
+  email: string;
+  password: string;
+  name: string;
+  surname: string;
+}
+interface IUseRegister {
+  data: IDataLoginRes | null;
+  loading: boolean;
+  error: unknown;
+}
+interface IDataRegisterRes {
+  message: string;
+  user: IUserLogin | null;
+  success: boolean;
+}
+
+
+interface IDataGenLink {
+  message: string;
+  url: string | null;
+  success: boolean;
+};
+interface IResUseGenLink {
+  data: IDataGenLink | null;
+  loading: boolean;
+  error: unknown;
+};
+
+interface IGenLinkParams {
+  email: string;
+};
+
+interface IResetPassParams {
+  token: string;
+  userId: string;
+  password: string;
+}
+interface IDataResetPass {
+  message: string;
+  success: boolean;
+}
+interface IResUseResetPass {
+  data: IDataResetPass | null;
   loading: boolean;
   error: unknown;
 }
@@ -129,3 +180,63 @@ export const useLogin = (): [
 
   return [login, { data, error, loading }];
 };
+
+export const useRegister = (): [
+  (data: IDataRegister) => Promise<void>,
+  IUseRegister
+] => {
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState<IDataRegisterRes | null>(null);
+  const [error, setError] = useState<unknown>(null);
+
+  const register = useCallback(async ({ email, password, name, surname }: IDataRegister) => {
+    try {
+      setLoading(true);
+      const res = await axiosUseRegister({ email, password, name, surname });
+      setLoading(false);
+      setData(res);
+    } catch (error) {
+      setError(error);
+    }
+  }, []);
+
+  return [register, { data, error, loading }];
+};
+
+export const useGenLinkResetPass = (): [(param: IGenLinkParams)=>Promise<void>, IResUseGenLink] => {
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState<IDataGenLink | null>(null);
+  const [error, setError] = useState<unknown>(null);
+
+  const genLinkResetPass = useCallback(async ({email}: IGenLinkParams)=>{
+    try {
+      setLoading(true);
+      const res = await axiosGenLinkResetPass(email);
+      setLoading(false);
+      setData(res);
+    } catch (error) {
+      setError(error);
+    }
+  }, [])
+
+  return [genLinkResetPass, { data, error, loading }];
+}
+
+export const useResetPass = (): [(param: IResetPassParams)=>Promise<void>, IResUseResetPass] => {
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState<IDataResetPass | null>(null);
+  const [error, setError] = useState<unknown>(null);
+
+  const resetPass = useCallback(async ({token, userId, password}: IResetPassParams)=>{
+    try {
+      setLoading(true);
+      const res = await axiosResetPassword({ token, userId, password });
+      setLoading(false);
+      setData(res);
+    } catch (error) {
+      setError(error);
+    }
+  }, [])
+
+  return [resetPass, { data, error, loading }];
+}
