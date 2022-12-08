@@ -303,17 +303,23 @@ const Header = () => {
             {user ? (
               <Menu>
                 <MenuButton
-                  as={Button}
-                  rounded={"full"}
-                  variant={"link"}
-                  cursor={"pointer"}
-                  minW={0}
+                  rounded="full"
+                  cursor="pointer"
                 >
-                  <Avatar size="sm" src={"/assets/imgs/varios/usuario.png"} />
+                  <Avatar
+                    margin="none"
+                    size="sm"
+                    bg="blue.200"
+                    name={user.name}
+                    src=""
+                  />
                 </MenuButton>
                 <MenuList>
-                  {/* <MenuDivider /> */}
-                  <MenuItem color="blue.300" display="flex" justifyContent="space-between" onClick={handleLogout}>Salir {" "} <DeleteIcon color="blue.300" /></MenuItem>
+                  <MenuItem color="blackAlpha.800">Hola, {user.name}</MenuItem>
+                  <MenuDivider />
+                  <MenuItem color="blue.300" onClick={handleLogout}>
+                    Salir <DeleteIcon color="blue.300" marginLeft={2} />
+                  </MenuItem>
                 </MenuList>
               </Menu>
             ) : (
