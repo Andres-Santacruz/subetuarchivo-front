@@ -12,26 +12,114 @@ import {
   Heading,
   Text,
   useColorModeValue,
-  Link,
+  Link as LinkChackra,
+  FormHelperText,
+  useToast,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useMemo, useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useAuth } from "../../hooks/useAuth";
 import { useRouter } from "next/router";
+import Link from "next/link";
+import { emailRegex } from "../../helpers";
+import { useRegister } from "../../hooks/useFetch";
+
+type ITypeParam = "name" | "surname" | "email" | "password" | "password2";
 
 export default function Register() {
-  const {user} = useAuth();
-  const router = useRouter();
-  const [showPassword, setShowPassword] = useState(false);
+  const { user, signIn } = useAuth();
+  const toast = useToast();
 
+  const [register, { data, error, loading }] = useRegister();
+  const router = useRouter();
+  const [form, setForm] = useState({
+    name: "",
+    surname: "",
+    email: "",
+    password: "",
+    password2: "",
+  });
+  const [showPassword, setShowPassword] = useState(false);
+  const [isOkButton, setIsOkButton] = useState(false);
 
   useEffect(() => {
-    console.log('user', user)
+    console.log("user", user);
     if (user) {
       router.push("/");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (data) {
+      if (data.success && data.user) {
+        signIn({
+          token: data.user.token,
+          user: data.user,
+        });
+        router.push("/");
+      } else {
+        toast({
+          title: "Error al registrarse",
+          description: data.message,
+          status: "error",
+          duration: 8000,
+          isClosable: true,
+          position: "top-right",
+        });
+      }
+    }
+    if (error) {
+      toast({
+        title: "Error al registrarse",
+        description: (error as any).message,
+        status: "error",
+        duration: 8000,
+        isClosable: true,
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data, error]);
+
+  const isValidEmail = useMemo(() => {
+    if (form.email === "") return true;
+    return emailRegex.test(form.email);
+  }, [form.email]);
+
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement>,
+    type: ITypeParam
+  ) => {
+    setForm((prev) => ({
+      ...prev,
+      [`${type}`]: e.target.value,
+    }));
+  };
+
+  useEffect(() => {
+    const isOk =
+      form.password.length > 3 &&
+      emailRegex.test(form.email) &&
+      form.password === form.password2 &&
+      form.name.length >= 3 &&
+      form.surname.length >= 3;
+    setIsOkButton(isOk);
+  }, [
+    form.email,
+    form.name.length,
+    form.password,
+    form.password2,
+    form.surname.length,
+  ]);
+
+  const handleSubmit = () => {
+    register({
+      email: form.email,
+      password: form.password,
+      name: form.name,
+      surname: form.surname,
+    });
+  };
 
   return (
     <Flex
@@ -49,10 +137,10 @@ export default function Register() {
         >
           <Stack align={"center"}>
             <Heading fontSize={"4xl"} textAlign={"center"}>
-              Sign up
+              Registrate
             </Heading>
             <Text fontSize={"lg"} color={"gray.600"}>
-              to enjoy all of our cool features ✌️
+              Para disfrutar de nuevas funcionalidades 👌
             </Text>
           </Stack>
           <Box
@@ -64,26 +152,52 @@ export default function Register() {
             <Stack spacing={4}>
               <HStack>
                 <Box>
-                  <FormControl id="firstName" isRequired>
-                    <FormLabel>First Name</FormLabel>
-                    <Input type="text" />
+                  <FormControl id="name" isRequired>
+                    <FormLabel>Nombre</FormLabel>
+                    <Input
+                      type="text"
+                      value={form.name}
+                      onChange={(e) => handleInputChange(e, "name")}
+                    />
                   </FormControl>
                 </Box>
                 <Box>
-                  <FormControl id="lastName">
-                    <FormLabel>Last Name</FormLabel>
-                    <Input type="text" />
+                  <FormControl id="surname" isRequired>
+                    <FormLabel>Apellido</FormLabel>
+                    <Input
+                      type="text"
+                      value={form.surname}
+                      onChange={(e) => handleInputChange(e, "surname")}
+                    />
                   </FormControl>
                 </Box>
               </HStack>
-              <FormControl id="email" isRequired>
-                <FormLabel>Email address</FormLabel>
-                <Input type="email" />
+              <FormControl id="email" isRequired isInvalid={!isValidEmail}>
+                <FormLabel>Correo Electrónico</FormLabel>
+                <Input
+                  type="email"
+                  value={form.email}
+                  onChange={(e) => handleInputChange(e, "email")}
+                />
+                {!isValidEmail && (
+                  <FormHelperText color="red.400" fontSize="xs">
+                    Correo electrónico no válido
+                  </FormHelperText>
+                )}
               </FormControl>
-              <FormControl id="password" isRequired>
-                <FormLabel>Password</FormLabel>
+
+              <FormControl
+                id="password"
+                isRequired
+                isInvalid={form.password !== form.password2}
+              >
+                <FormLabel>Contraseña</FormLabel>
                 <InputGroup>
-                  <Input type={showPassword ? "text" : "password"} />
+                  <Input
+                    type={showPassword ? "text" : "password"}
+                    value={form.password}
+                    onChange={(e) => handleInputChange(e, "password")}
+                  />
                   <InputRightElement h={"full"}>
                     <Button
                       variant={"ghost"}
@@ -96,6 +210,24 @@ export default function Register() {
                   </InputRightElement>
                 </InputGroup>
               </FormControl>
+
+              <FormControl
+                id="password2"
+                isRequired
+                isInvalid={form.password !== form.password2}
+              >
+                <FormLabel>Confirma contraseña</FormLabel>
+                <Input
+                  type="password"
+                  value={form.password2}
+                  onChange={(e) => handleInputChange(e, "password2")}
+                />
+                {form.password !== form.password2 && (
+                  <FormHelperText color="red.400" fontSize="xs">
+                    Las contraseñas no coinciden
+                  </FormHelperText>
+                )}
+              </FormControl>
               <Stack spacing={10} pt={2}>
                 <Button
                   loadingText="Submitting"
@@ -105,13 +237,19 @@ export default function Register() {
                   _hover={{
                     bg: "blue.500",
                   }}
+                  onClick={handleSubmit}
+                  disabled={!isOkButton || loading}
+                  isLoading={loading}
                 >
-                  Sign up
+                  Registrarse
                 </Button>
               </Stack>
               <Stack pt={6}>
                 <Text align={"center"}>
-                  Already a user? <Link color={"blue.400"}>Login</Link>
+                  ¿Ya tienes cuenta?{" "}
+                  <Link href="/users/login" passHref>
+                    <LinkChackra color={"blue.400"}>Iniciar sesión</LinkChackra>
+                  </Link>
                 </Text>
               </Stack>
             </Stack>
