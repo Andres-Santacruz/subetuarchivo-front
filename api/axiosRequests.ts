@@ -7,6 +7,7 @@ interface IPropsLogin {
 
 interface IPropsRegister extends IPropsLogin {
   name: string;
+  surname: string;
 }
 
 interface User {
@@ -46,6 +47,23 @@ interface IResUpload {
   success: boolean;
 }
 
+interface IResGenLink {
+  message: string;
+  url: string | null;
+  success: boolean;
+}
+
+interface IParamResetPass {
+  token: string;
+  userId: string;
+  password: string;
+}
+
+interface IResResetPass {
+  message: string;
+  success: boolean;
+}
+
 export const axiosUseLogin = async ({ email, password }: IPropsLogin) => {
   const { data } = await axiosApi.post<IResLogin>("/login", {
     email,
@@ -59,11 +77,13 @@ export const axiosUseRegister = async ({
   email,
   password,
   name,
+  surname
 }: IPropsRegister) => {
   const { data } = await axiosApi.post<IResLogin>("/register", {
     email,
     password,
     name,
+    surname
   });
 
   return { ...data };
@@ -115,3 +135,24 @@ export const axiosUseUploadFile = async ({
 
   return { ...data };
 };
+
+export const axiosGenLinkResetPass = async (email: string)=>{
+  const { data } = await axiosApi.post<IResGenLink>(
+    "/generate-reset-password",
+    {
+      email,
+    }
+  );
+
+  return {...data}
+}
+
+export const axiosResetPassword = async ({token, userId, password }:IParamResetPass) => {
+  const {data} = await axiosApi.post<IResResetPass>("/reset", {
+    token,
+    userId,
+    password
+  });
+
+  return { ...data}
+}
