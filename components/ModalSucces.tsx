@@ -60,7 +60,7 @@ const ModalSucces = ({
           </Box>
         </ModalBody>
         <ModalFooter>
-          <Button variant="ghost">Cancelar</Button>
+          <Button variant="ghost">Aceptar</Button>
           <Button
             colorScheme="blue"
             mr={3}
