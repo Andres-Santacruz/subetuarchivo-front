@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, useRef, LegacyRef } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
 import { useRouter } from "next/router";
 import ReCAPTCHA from "react-google-recaptcha";
 import {
@@ -15,6 +15,7 @@ import {
 import { emailRegex } from "../../helpers";
 import { useAuth } from "../../hooks/useAuth";
 import { useGenLinkResetPass } from "../../hooks/useFetch";
+import Recaptcha from "../../components/Recaptcha";
 
 export default function ForgotPasswordForm(): JSX.Element {
   const { user } = useAuth();
@@ -75,19 +76,40 @@ export default function ForgotPasswordForm(): JSX.Element {
   }, [email]);
 
   const hanldeClick = () => {
-    if(!recaptchaRef.current?.getValue()){
-      setErrorCaptcha(true);
-      return;
+    try {
+      const token = recaptchaRef.current?.getValue();
+      if (!token) {
+        setErrorCaptcha(true);
+        return;
+      }
+    } catch (error) {
+      recaptchaRef.current?.reset();
+      if(typeof window !== "undefined"){
+        window.location.reload();
+      }
+      return toast({
+        title: "¡Error!",
+        description: "Por favor recarga la página",
+        status: "error",
+        duration: 8000,
+        isClosable: true,
+        position: "top-right",
+
+      });
     }
     if (isValidEmail) {
       genLinkResetPass({ email });
     }
   };
 
-  const onChangeRecaptcha = (token: string | null) => {
-    console.log("token", token);
-    console.log('vea -->',recaptchaRef.current?.getValue())
-  };
+  useEffect(() => {
+    const clean = recaptchaRef.current;
+    return () => {
+      if (clean) {
+        clean.reset();
+      }
+    };
+  }, []);
 
   return (
     <Flex
@@ -131,15 +153,7 @@ export default function ForgotPasswordForm(): JSX.Element {
           justifyContent="center"
           alignItems="center"
         >
-          <ReCAPTCHA
-            ref={recaptchaRef}
-            sitekey={
-              process.env.RECAReCAPTCHA_KEY ||
-              "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
-            }
-            onChange={onChangeRecaptcha}
-            // size="invisible"
-          />
+          <Recaptcha setErrorCaptcha={setErrorCaptcha} ref={recaptchaRef} />
           {errorCaptcha && (
             <Text fontSize="smaller" color="red.400">
               Acepta el recaptcha para continuar

@@ -1,3 +1,4 @@
+import { ChangeEvent, useEffect, useMemo, useState, useRef } from "react";
 import {
   Flex,
   Box,
@@ -16,19 +17,22 @@ import {
   FormHelperText,
   useToast,
 } from "@chakra-ui/react";
-import { ChangeEvent, useEffect, useMemo, useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useAuth } from "../../hooks/useAuth";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { emailRegex } from "../../helpers";
 import { useRegister } from "../../hooks/useFetch";
+import Recaptcha from "../../components/Recaptcha";
+import ReCAPTCHA from "react-google-recaptcha";
 
 type ITypeParam = "name" | "surname" | "email" | "password" | "password2";
 
 export default function Register() {
   const { user, signIn } = useAuth();
   const toast = useToast();
+
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   const [register, { data, error, loading }] = useRegister();
   const router = useRouter();
@@ -41,6 +45,7 @@ export default function Register() {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [isOkButton, setIsOkButton] = useState(false);
+  const [errorCaptcha, setErrorCaptcha] = useState(false);
 
   useEffect(() => {
     console.log("user", user);
@@ -113,6 +118,9 @@ export default function Register() {
   ]);
 
   const handleSubmit = () => {
+    if(!recaptchaRef.current?.getValue()){
+      return setErrorCaptcha(true);
+    }
     register({
       email: form.email,
       password: form.password,
@@ -228,6 +236,22 @@ export default function Register() {
                   </FormHelperText>
                 )}
               </FormControl>
+              <Stack
+                spacing={4}
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+              >
+                <Recaptcha
+                  setErrorCaptcha={setErrorCaptcha}
+                  ref={recaptchaRef}
+                />
+                {errorCaptcha && (
+                  <Text fontSize="smaller" color="red.400">
+                    Acepta el recaptcha para continuar
+                  </Text>
+                )}
+              </Stack>
               <Stack spacing={10} pt={2}>
                 <Button
                   loadingText="Submitting"
