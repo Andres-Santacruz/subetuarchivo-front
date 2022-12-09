@@ -1,3 +1,6 @@
+import { useEffect, useMemo, useState, useRef, LegacyRef } from "react";
+import { useRouter } from "next/router";
+import ReCAPTCHA from "react-google-recaptcha";
 import {
   Button,
   FormControl,
@@ -9,34 +12,31 @@ import {
   useColorModeValue,
   useToast,
 } from "@chakra-ui/react";
-import { useRouter } from "next/router";
-import { useEffect, useMemo, useState } from "react";
 import { emailRegex } from "../../helpers";
 import { useAuth } from "../../hooks/useAuth";
 import { useGenLinkResetPass } from "../../hooks/useFetch";
 
-type ForgotPasswordFormInputs = {
-  email: string;
-};
-
 export default function ForgotPasswordForm(): JSX.Element {
-  const {user} = useAuth();
+  const { user } = useAuth();
   const router = useRouter();
   const toast = useToast();
-  const [genLinkResetPass, {data, error, loading}] = useGenLinkResetPass();
+
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
+
+  const [genLinkResetPass, { data, error, loading }] = useGenLinkResetPass();
   const [email, setEmail] = useState("");
+  const [errorCaptcha, setErrorCaptcha] = useState(false);
 
   useEffect(() => {
-    if(user){
-      router.push('/')
+    if (user) {
+      router.push("/");
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user])
-  
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
 
   useEffect(() => {
-    if(data){
-      if(data.success){
+    if (data) {
+      if (data.success) {
         toast({
           title: "Revisa tu correo",
           description: data.message,
@@ -45,7 +45,7 @@ export default function ForgotPasswordForm(): JSX.Element {
           isClosable: true,
           position: "top-right",
         });
-      }else{
+      } else {
         toast({
           title: "Error al generar Link",
           description: data.message,
@@ -56,7 +56,7 @@ export default function ForgotPasswordForm(): JSX.Element {
         });
       }
     }
-    if(error){
+    if (error) {
       toast({
         title: "Error al generar Link",
         description: (error as any).message,
@@ -66,19 +66,27 @@ export default function ForgotPasswordForm(): JSX.Element {
         position: "top-right",
       });
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data, error])
-  
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data, error]);
 
-   const isValidEmail = useMemo(() => {
-     if (email === "") return true;
-     return emailRegex.test(email);
-   }, [email]);
+  const isValidEmail = useMemo(() => {
+    if (email === "") return true;
+    return emailRegex.test(email);
+  }, [email]);
 
   const hanldeClick = () => {
-    if(isValidEmail){
-      genLinkResetPass({email});
+    if(!recaptchaRef.current?.getValue()){
+      setErrorCaptcha(true);
+      return;
     }
+    if (isValidEmail) {
+      genLinkResetPass({ email });
+    }
+  };
+
+  const onChangeRecaptcha = (token: string | null) => {
+    console.log("token", token);
+    console.log('vea -->',recaptchaRef.current?.getValue())
   };
 
   return (
@@ -117,6 +125,27 @@ export default function ForgotPasswordForm(): JSX.Element {
             onChange={(e) => setEmail(e.target.value)}
           />
         </FormControl>
+        <Stack
+          spacing={4}
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+        >
+          <ReCAPTCHA
+            ref={recaptchaRef}
+            sitekey={
+              process.env.RECAReCAPTCHA_KEY ||
+              "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+            }
+            onChange={onChangeRecaptcha}
+            // size="invisible"
+          />
+          {errorCaptcha && (
+            <Text fontSize="smaller" color="red.400">
+              Acepta el recaptcha para continuar
+            </Text>
+          )}
+        </Stack>
         <Stack spacing={6}>
           <Button
             bg={"blue.400"}
