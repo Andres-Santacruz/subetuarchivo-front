@@ -148,7 +148,19 @@ export const FormUploadFile = ({
     );
   };
 
+  const upLoadFileWithUser = async () => {
+    
+    // enviar email con OTP
+    await onUpFile(1234);
+    setIsLoadingOTP(false);
+  }
+
   const handleGeneradeOTP = async () => {
+
+    if(user){
+      return await upLoadFileWithUser();
+    }
+
     if (emailRegex.test(email)) {
       setIsLoadingOTP(true);
       // enviar email con OTP
