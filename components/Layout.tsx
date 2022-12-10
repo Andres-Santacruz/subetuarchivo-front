@@ -28,7 +28,7 @@ const Layout = ({ children }: { children: JSX.Element }) => {
     <div>
       <Flex direction="column" scrollBehavior="smooth">
         <Header />
-        <FilesFloating path="../assets/imgs/files/" />
+        <FilesFloating path="/assets/imgs/files/" />
         {children}
         <FloatingButton />
         <Footer />
