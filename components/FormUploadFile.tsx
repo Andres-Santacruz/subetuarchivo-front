@@ -1,7 +1,5 @@
 // import { useMutation } from "@apollo/client";
-import {
-  PlusSquareIcon,
-} from "@chakra-ui/icons";
+import { PlusSquareIcon } from "@chakra-ui/icons";
 import {
   Accordion,
   AccordionButton,
@@ -74,8 +72,8 @@ const getImageFile = (file: File): string => {
 
 type IConfig = {
   password?: string;
-  time?: number; 
-}
+  time?: number;
+};
 type configAdd = {
   files: File[];
   email: string;
@@ -90,9 +88,9 @@ export const FormUploadFile = ({
   setCodeReady: React.Dispatch<SetStateAction<string | undefined>>;
   codeReady: string | undefined;
 }): JSX.Element => {
-  const {user} = useAuth();
+  const { user } = useAuth();
   const [generateOtp, { data, loading, error }] = useGenerateOtp();
-  
+
   /* const [
     uploadFile,
     { data: dataUpload, error: errorUpload, loading: loadingUpload },
@@ -123,15 +121,12 @@ export const FormUploadFile = ({
   const [isOkButton, setIsOkButton] = useState(false);
 
   useEffect(() => {
-    
-    if(user){
+    if (user) {
       setEmail(user.email);
-    }else{
+    } else {
       setEmail("");
     }
-    
-  }, [user])
-  
+  }, [user]);
 
   const isValidEmail = useMemo(() => {
     if (email === "") return true;
@@ -149,15 +144,13 @@ export const FormUploadFile = ({
   };
 
   const upLoadFileWithUser = async () => {
-    
     // enviar email con OTP
     await onUpFile(1234);
     setIsLoadingOTP(false);
-  }
+  };
 
   const handleGeneradeOTP = async () => {
-
-    if(user){
+    if (user) {
       return await upLoadFileWithUser();
     }
 
@@ -170,13 +163,13 @@ export const FormUploadFile = ({
   };
 
   useEffect(() => {
-    if(data){
+    if (data) {
       if (data.success) {
         setIsModalOpen(true);
       } else if (!data.success) {
         toast({
           title: "No se pudo crear codigo OTP",
-          description: data.message ,
+          description: data.message,
           status: "error",
           duration: 8000,
           isClosable: true,
@@ -186,7 +179,7 @@ export const FormUploadFile = ({
   }, [data, error, toast]);
 
   useEffect(() => {
-    if(dataUpload){
+    if (dataUpload) {
       if (dataUpload.success && dataUpload.info) {
         setCodeReady(dataUpload.info); // rta code finish
         setIsModalOpenSucces(true);
@@ -218,6 +211,7 @@ export const FormUploadFile = ({
           validationId: codeVerify,
         };
         if (config) {
+          console.log('config', config)
           sendData.config = config;
         }
         // enviar archivo y todo
@@ -277,16 +271,23 @@ export const FormUploadFile = ({
           </Text>
         </Stack>
 
-        <FormControl isRequired isInvalid={!isValidEmail} isDisabled={Boolean(user)}>
+        <FormControl
+          isRequired
+          isInvalid={!isValidEmail}
+          isDisabled={Boolean(user)}
+        >
           <FormLabel>Correo electrónico</FormLabel>
           <Input
             type="email"
             value={email}
+            maxLength={4}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <FormHelperText>
-            Recibirás un código para poder subir tu archivo
-          </FormHelperText>
+          {!user && (
+            <FormHelperText>
+              Recibirás un código para poder subir tu archivo
+            </FormHelperText>
+          )}
         </FormControl>
 
         <DropzoneForm setFilesUploaded={setFilesUploaded} />
@@ -397,12 +398,7 @@ export const FormUploadFile = ({
               onClick={onOpen}
               variant="outline"
               aria-label="Add config"
-              /* <SettingsIcon
-                color={config.length > 0 ? "orange.300" : "black"}
-              /> */
-              icon={
-                <IconSetting config={config} />
-              }
+              icon={<IconSetting config={config} />}
             />
           </Tooltip>
         </HStack>
@@ -425,6 +421,7 @@ export const FormUploadFile = ({
         isOpen={isOpen}
         btnRef={btnRef}
         setConfig={setConfig}
+        config={config}
       />
 
       <ModalConfirmOTP
