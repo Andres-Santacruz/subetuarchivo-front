@@ -3,6 +3,7 @@ import {
   axiosGenLinkResetPass,
   axiosResetPassword,
   axiosUseGenerateOtp,
+  axiosUseGetFileProtected,
   axiosUseLogin,
   axiosUseRegister,
   axiosUseUploadFile,
@@ -104,6 +105,18 @@ interface IDataResetPass {
 }
 interface IResUseResetPass {
   data: IDataResetPass | null;
+  loading: boolean;
+  error: unknown;
+}
+
+export interface IDataGetFileProt {
+  message: string;
+  success: boolean;
+  urls: string[] | null;
+}
+
+interface IResGetFileProtected {
+  data: IDataGetFileProt | null;
   loading: boolean;
   error: unknown;
 }
@@ -240,3 +253,26 @@ export const useResetPass = (): [(param: IResetPassParams)=>Promise<void>, IResU
 
   return [resetPass, { data, error, loading }];
 }
+
+export const useGetFileProtected = (): [
+  (code: string, password: string) => Promise<void>,
+  IResGetFileProtected
+] => {
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState<IDataGetFileProt | null>(null);
+  const [error, setError] = useState<unknown>(null);
+
+  const getFileProtected = useCallback(async (code: string, password: string) => {
+    try {
+      setLoading(true);
+      const res = await axiosUseGetFileProtected(code, password);
+      console.log('res VEA VEA', res )
+      setData(res);
+      setLoading(false);
+    } catch (error) {
+      setError(error);
+    }
+  }, []);
+
+  return [getFileProtected, { data, loading, error }];
+};
