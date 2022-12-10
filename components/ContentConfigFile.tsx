@@ -126,10 +126,6 @@ const ContentConfigFile = ({ setConfig, onClose, config }: IPropContent) => {
         password: form.password,
         time,
       });
-      console.log("{password: form.password, time}", {
-        password: form.password,
-        time,
-      });
       onClose();
     }
   };

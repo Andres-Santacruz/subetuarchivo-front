@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useRef, useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import CryptoJS from "crypto-js";
 import AES from "crypto-js/aes";
 import Lottie from "lottie-react";
 import otp from "../public/assets/imgs/lotties/otp.json";
@@ -89,7 +90,21 @@ export const SearchCode = (): JSX.Element => {
 
     if (code.length === 6) {
       const url = AES.encrypt(code, "fcbarcelona").toString();
+      console.log('url', url)
       router.push(`/file/${url}`);
+
+      /* const value = CryptoJS.enc.Hex.parse(code);
+      const key = CryptoJS.enc.Hex.parse(
+        "fcbarcelona1234567890lucasvalenciahenao"
+      );
+      const ivvar = CryptoJS.enc.Hex.parse("00000000000000000000000000000000");
+
+      const encryptedUrlgHex = AES.encrypt(value, key, {
+        iv: ivvar,
+        mode: CryptoJS.mode.CBC,
+        padding: CryptoJS.pad.NoPadding,
+      }).ciphertext;
+      router.push(`/file/${encryptedUrlgHex}`); */
     }
   };
 

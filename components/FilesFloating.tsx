@@ -4,7 +4,7 @@ import {
   usePrefersReducedMotion,
   Image,
 } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 const moving_background = keyframes`
   0% {

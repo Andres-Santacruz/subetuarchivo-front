@@ -10,7 +10,6 @@ const Recaptcha = forwardRef<ReCAPTCHA, IPropsRecaptcha>(
   ({ setErrorCaptcha, isInVisble }, ref) => {
 
     const onChangeRecaptcha = (token: string | null) => {
-      console.log('Boolean(token)', Boolean(token))
       setErrorCaptcha(!Boolean(token));
     };    
 

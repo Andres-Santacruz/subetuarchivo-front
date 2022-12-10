@@ -21,18 +21,13 @@ interface IResGetTime {
 }
 
 export const getTimeNumber = (timeNumber: number): IResGetTime => {
-  console.log('timeNumber', timeNumber)
   const time = timeNumber / (1000 * 60);
-  console.log('time', time)
 
   if (time % 24 === 0) {
-    console.log("entre % 24", time / (24 * 60));
     return { getTime: time / (24 * 60), getFormat: "dd" };
   } else if (time / 60 > 1) {
-    console.log("entre % 60", time / (60));
     return { getTime: time / 60, getFormat: "hh" };
   } else {
-    console.log("entre DEFAULT", time);
     return { getTime: time, getFormat: "mm" };
   }
 };

@@ -42,7 +42,6 @@ const Login = () => {
   const [login, { data, loading, error }] = useLogin();
 
   useEffect(() => {
-    console.log("user", user);
     if (user) {
       router.push("/");
     }
