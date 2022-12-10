@@ -151,12 +151,7 @@ export default function Register() {
               Para disfrutar de nuevas funcionalidades 👌
             </Text>
           </Stack>
-          <Box
-            rounded={"lg"}
-            bg={useColorModeValue("white", "gray.700")}
-            boxShadow={"lg"}
-            p={8}
-          >
+
             <Stack spacing={4}>
               <HStack>
                 <Box>
@@ -277,7 +272,7 @@ export default function Register() {
                 </Text>
               </Stack>
             </Stack>
-          </Box>
+          
         </Box>
       </Stack>
     </Flex>
