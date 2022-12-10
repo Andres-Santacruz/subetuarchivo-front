@@ -97,6 +97,16 @@ export const axiosUseGetFile = async (code: string) => {
   return { ...data };
 };
 
+export const axiosUseGetFileProtected = async (code: string, password: string) => {
+  
+  const { data } = await axiosApi.post<IResGetFile>("/getfile", {
+    code,
+    password
+  });
+
+  return { ...data };
+};
+
 export const axiosUseGenerateOtp = async (email: string) => {
   const { data } = await axiosApi.post<IResGenOtp>("/genotp", {
     email,
