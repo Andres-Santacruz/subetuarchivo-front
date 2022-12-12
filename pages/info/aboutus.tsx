@@ -13,6 +13,15 @@ import {
 
 import { ReactElement } from "react";
 import { InfoIcon, Search2Icon, StarIcon } from "@chakra-ui/icons";
+import OwnHead from "../../components/OwnHead";
+
+const SEO = {
+  title: "Sobre nosotros — Subetuarchivo ",
+  description:
+    "Conoce al equipo de subeturachivo, nuestra misión y visión",
+  url: "/info/aboutus",
+  imgName: "home.png",
+};
 
 interface FeatureProps {
   text: string;
@@ -22,19 +31,27 @@ interface FeatureProps {
 
 const Feature = ({ text, icon, iconBg }: FeatureProps) => {
   return (
-    <Stack direction={"row"} align={"center"}>
-      <Flex
-        w={8}
-        h={8}
-        align={"center"}
-        justify={"center"}
-        rounded={"full"}
-        bg={iconBg}
-      >
-        {icon}
-      </Flex>
-      <Text fontWeight={600}>{text}</Text>
-    </Stack>
+    <>
+      <OwnHead
+        title={SEO.title}
+        description={SEO.description}
+        imgName={SEO.imgName}
+        url={SEO.url}
+      />
+      <Stack direction={"row"} align={"center"}>
+        <Flex
+          w={8}
+          h={8}
+          align={"center"}
+          justify={"center"}
+          rounded={"full"}
+          bg={iconBg}
+        >
+          {icon}
+        </Flex>
+        <Text fontWeight={600}>{text}</Text>
+      </Stack>
+    </>
   );
 };
 

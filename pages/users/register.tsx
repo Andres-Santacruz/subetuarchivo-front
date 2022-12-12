@@ -25,6 +25,15 @@ import { emailRegex } from "../../helpers";
 import { useRegister } from "../../hooks/useFetch";
 import Recaptcha from "../../components/Recaptcha";
 import ReCAPTCHA from "react-google-recaptcha";
+import OwnHead from "../../components/OwnHead";
+
+const SEO = {
+  title: "Registrate — Subetuarchivo ",
+  description:
+    "Registrate en subetuarchivo para disfrutar de configuraciones avanzadas",
+  url: "/users/register",
+  imgName: "register.png",
+};
 
 type ITypeParam = "name" | "surname" | "email" | "password" | "password2";
 
@@ -130,27 +139,34 @@ export default function Register() {
   };
 
   return (
-    <Flex
-      minH={"100vh"}
-      align={"center"}
-      justify={"center"}
-      // bg={useColorModeValue("gray.50", "gray.800")}
-    >
-      <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
-        <Box
-          rounded={"lg"}
-          bg={useColorModeValue("white", "gray.700")}
-          boxShadow={"lg"}
-          p={8}
-        >
-          <Stack align={"center"}>
-            <Heading fontSize={"4xl"} textAlign={"center"}>
-              Registrate
-            </Heading>
-            <Text fontSize={"lg"} color={"gray.600"}>
-              Para disfrutar de nuevas funcionalidades 👌
-            </Text>
-          </Stack>
+    <>
+      <OwnHead
+        title={SEO.title}
+        description={SEO.description}
+        imgName={SEO.imgName}
+        url={SEO.url}
+      />
+      <Flex
+        minH={"100vh"}
+        align={"center"}
+        justify={"center"}
+        // bg={useColorModeValue("gray.50", "gray.800")}
+      >
+        <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+          <Box
+            rounded={"lg"}
+            bg={useColorModeValue("white", "gray.700")}
+            boxShadow={"lg"}
+            p={8}
+          >
+            <Stack align={"center"}>
+              <Heading fontSize={"4xl"} textAlign={"center"}>
+                Registrate
+              </Heading>
+              <Text fontSize={"lg"} color={"gray.600"}>
+                Para disfrutar de nuevas funcionalidades 👌
+              </Text>
+            </Stack>
 
             <Stack spacing={4}>
               <HStack>
@@ -272,9 +288,9 @@ export default function Register() {
                 </Text>
               </Stack>
             </Stack>
-          
-        </Box>
-      </Stack>
-    </Flex>
+          </Box>
+        </Stack>
+      </Flex>
+    </>
   );
 }

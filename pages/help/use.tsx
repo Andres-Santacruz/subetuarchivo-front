@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import {
   Container,
   Stack,
@@ -17,342 +16,358 @@ import {
 import Lottie from "lottie-react";
 import notFound from "../../public/assets/imgs/lotties/howuse.json";
 import { useRef } from "react";
+import OwnHead from "../../components/OwnHead";
+
+const SEO = {
+  title: "¿Cómo utilizar? — Subetuarchivo ",
+  description:
+    "Conoce cómo utilizar nuestra plataforma y acceder a todo sus contenidos y funcionalidades",
+  url: "/help/use",
+  imgName: "home.png",
+};
 
 export default function HoeToUse() {
   const uploadElemet = useRef<HTMLDivElement>(null);
   const downloadElemet = useRef<HTMLDivElement>(null);
-  const router = useRouter();
   return (
-    <Container maxW={"7xl"} mt={10} backgroundColor="white" borderRadius="xl">
-      <Stack
-        textAlign={"center"}
-        align={"center"}
-        spacing={8}
-        pt={{ base: 20, md: 28 }}
-      >
-        <Heading
-          fontWeight={700}
-          fontSize={{ base: "3xl", sm: "4xl", md: "6xl" }}
-          lineHeight={"110%"}
+    <>
+      <OwnHead
+        title={SEO.title}
+        description={SEO.description}
+        imgName={SEO.imgName}
+        url={SEO.url}
+      />
+      <Container maxW={"7xl"} mt={10} backgroundColor="white" borderRadius="xl">
+        <Stack
+          textAlign={"center"}
+          align={"center"}
+          spacing={8}
+          pt={{ base: 20, md: 28 }}
         >
-          Sube y Comparte{" "}
-          <Text as={"span"} color={"blue.400"}>
-            Facil
+          <Heading
+            fontWeight={700}
+            fontSize={{ base: "3xl", sm: "4xl", md: "6xl" }}
+            lineHeight={"110%"}
+          >
+            Sube y Comparte{" "}
+            <Text as={"span"} color={"blue.400"}>
+              Facil
+            </Text>
+          </Heading>
+          <Text color={"gray.500"} maxW={"3xl"}>
+            Never miss a meeting. Never be late for one too. Keep track of your
+            meetings and receive smart reminders in appropriate times. Read your
+            smart “Daily Agenda” every morning.
           </Text>
-        </Heading>
-        <Text color={"gray.500"} maxW={"3xl"}>
-          Never miss a meeting. Never be late for one too. Keep track of your
-          meetings and receive smart reminders in appropriate times. Read your
-          smart “Daily Agenda” every morning.
-        </Text>
-        <Stack spacing={6} direction={"row"}>
-          <Button
-            rounded="full"
-            px={6}
-            colorScheme="blue"
-            bg={"blue.600"}
-            _hover={{ bg: "blue.700" }}
-            onClick={() => uploadElemet.current?.scrollIntoView()}
-          >
-            Subir Archivos
-          </Button>
-          <Button
-            rounded={"full"}
-            px={6}
-            onClick={() => downloadElemet.current?.scrollIntoView()}
-          >
-            Buscar Archivos
-          </Button>
-        </Stack>
-        <Flex w={"full"} alignItems="center" justifyContent="center">
-          <Box height={{ sm: "24rem", lg: "28rem" }} mt={-10}>
-            <Lottie
-              animationData={notFound}
-              style={{ width: "100%", height: "100%" }}
-            />
-          </Box>
-          {/* <Illustration
+          <Stack spacing={6} direction={"row"}>
+            <Button
+              rounded="full"
+              px={6}
+              colorScheme="blue"
+              bg={"blue.600"}
+              _hover={{ bg: "blue.700" }}
+              onClick={() => uploadElemet.current?.scrollIntoView()}
+            >
+              Subir Archivos
+            </Button>
+            <Button
+              rounded={"full"}
+              px={6}
+              onClick={() => downloadElemet.current?.scrollIntoView()}
+            >
+              Buscar Archivos
+            </Button>
+          </Stack>
+          <Flex w={"full"} alignItems="center" justifyContent="center">
+            <Box height={{ sm: "24rem", lg: "28rem" }} mt={-10}>
+              <Lottie
+                animationData={notFound}
+                style={{ width: "100%", height: "100%" }}
+              />
+            </Box>
+            {/* <Illustration
             
           /> */}
-        </Flex>
-      </Stack>
-      <Stack
-        textAlign={"center"}
-        align={"center"}
-        spacing={8}
-        pt={12}
-        id="upload"
-        ref={uploadElemet}
-      >
-        <Heading
-          fontWeight={700}
-          fontSize={{ base: "3xl", sm: "4xl", md: "6xl" }}
-          lineHeight={"110%"}
-        >
-          <Text as={"span"} color={"blue.400"}>
-            ¿
-          </Text>
-          Cómo subir archivos
-          <Text as={"span"} color={"blue.400"}>
-            ?
-          </Text>
-        </Heading>
-        {/* inicia */}
-        <Stack
-          align={"center"}
-          spacing={{ base: 8, md: 10 }}
-          py={18}
-          direction={{ base: "column", md: "row" }}
-        >
-          <Stack flex={1} spacing={{ base: 5, md: 10 }}>
-            <Heading
-              lineHeight={1.1}
-              fontWeight={600}
-              fontSize={{ base: "3xl", sm: "4xl", lg: "6xl" }}
-            >
-              <Text
-                as={"span"}
-                position={"relative"}
-                _after={{
-                  content: "''",
-                  width: "full",
-                  height: "30%",
-                  position: "absolute",
-                  bottom: 1,
-                  left: 0,
-                  bg: "red.400",
-                  zIndex: -1,
-                }}
-              >
-                Write once,
-              </Text>
-              <br />
-              <Text as={"span"} color={"red.400"}>
-                use everywhere!
-              </Text>
-            </Heading>
-            <Text color={"gray.500"}>
-              Snippy is a rich coding snippets app that lets you create your own
-              code snippets, categorize them, and even sync them in the cloud so
-              you can use them anywhere. All that is free!
-            </Text>
-            <Stack
-              spacing={{ base: 4, sm: 6 }}
-              direction={{ base: "column", sm: "row" }}
-            >
-              <Button
-                rounded={"full"}
-                size={"lg"}
-                fontWeight={"normal"}
-                px={6}
-                colorScheme={"red"}
-                bg={"red.400"}
-                _hover={{ bg: "red.500" }}
-              >
-                Get started
-              </Button>
-              <Button
-                rounded={"full"}
-                size={"lg"}
-                fontWeight={"normal"}
-                px={6}
-                leftIcon={<PlayIcon h={4} w={4} color={"gray.300"} />}
-              >
-                How It Works
-              </Button>
-            </Stack>
-          </Stack>
-          <Flex
-            flex={1}
-            justify={"center"}
-            align={"center"}
-            position={"relative"}
-            w={"full"}
-          >
-            <Blob
-              w={"150%"}
-              h={"150%"}
-              position={"absolute"}
-              top={"-20%"}
-              left={0}
-              zIndex={-1}
-              color={useColorModeValue("red.50", "red.400")}
-            />
-            <Box
-              position={"relative"}
-              height={"300px"}
-              rounded={"2xl"}
-              boxShadow={"2xl"}
-              width={"full"}
-              overflow={"hidden"}
-            >
-              <IconButton
-                aria-label={"Play Button"}
-                variant={"ghost"}
-                _hover={{ bg: "transparent" }}
-                icon={<PlayIcon w={12} h={12} />}
-                size={"lg"}
-                color={"white"}
-                position={"absolute"}
-                left={"50%"}
-                top={"50%"}
-                transform={"translateX(-50%) translateY(-50%)"}
-              />
-              <Image
-                alt={"Hero Image"}
-                fit={"cover"}
-                align={"center"}
-                w={"100%"}
-                h={"100%"}
-                src={
-                  "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=800&q=80"
-                }
-              />
-            </Box>
           </Flex>
         </Stack>
-        {/* termina */}
-      </Stack>
-
-      {/* another secction DOWNLOAD */}
-      <Stack
-        textAlign={"center"}
-        align={"center"}
-        spacing={8}
-        pt={12}
-        pb={{ base: 28, md: 20 }}
-        id="download"
-        ref={downloadElemet}
-      >
-        <Heading
-          fontWeight={700}
-          fontSize={{ base: "3xl", sm: "4xl", md: "6xl" }}
-          lineHeight={"110%"}
-        >
-          <Text as={"span"} color={"blue.400"}>
-            ¿
-          </Text>
-          Cómo encontrar archivos
-          <Text as={"span"} color={"blue.400"}>
-            ?
-          </Text>
-        </Heading>
-
         <Stack
+          textAlign={"center"}
           align={"center"}
-          spacing={{ base: 8, md: 10 }}
-          py={18}
-          direction={{ base: "column-reverse", md: "row" }}
+          spacing={8}
+          pt={12}
+          id="upload"
+          ref={uploadElemet}
         >
-          <Flex
-            flex={1}
-            justify={"center"}
-            align={"center"}
-            position={"relative"}
-            w={"full"}
+          <Heading
+            fontWeight={700}
+            fontSize={{ base: "3xl", sm: "4xl", md: "6xl" }}
+            lineHeight={"110%"}
           >
-            <Blob
-              w={"150%"}
-              h={"150%"}
-              position={"absolute"}
-              top={"-20%"}
-              left={0}
-              zIndex={-1}
-              color={useColorModeValue("red.50", "red.400")}
-            />
-            <Box
-              position={"relative"}
-              height={"300px"}
-              rounded={"2xl"}
-              boxShadow={"2xl"}
-              width={"full"}
-              overflow={"hidden"}
-            >
-              <IconButton
-                aria-label={"Play Button"}
-                variant={"ghost"}
-                _hover={{ bg: "transparent" }}
-                icon={<PlayIcon w={12} h={12} />}
-                size={"lg"}
-                color={"white"}
-                position={"absolute"}
-                left={"50%"}
-                top={"50%"}
-                transform={"translateX(-50%) translateY(-50%)"}
-              />
-              <Image
-                alt={"Hero Image"}
-                fit={"cover"}
-                align={"center"}
-                w={"100%"}
-                h={"100%"}
-                src={
-                  "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=800&q=80"
-                }
-              />
-            </Box>
-          </Flex>
-          <Stack flex={1} spacing={{ base: 5, md: 10 }}>
-            <Heading
-              lineHeight={1.1}
-              fontWeight={600}
-              fontSize={{ base: "3xl", sm: "4xl", lg: "6xl" }}
-            >
-              <Text
-                as={"span"}
-                position={"relative"}
-                _after={{
-                  content: "''",
-                  width: "full",
-                  height: "30%",
-                  position: "absolute",
-                  bottom: 1,
-                  left: 0,
-                  bg: "red.400",
-                  zIndex: -1,
-                }}
-              >
-                Write once,
-              </Text>
-              <br />
-              <Text as={"span"} color={"red.400"}>
-                use everywhere!
-              </Text>
-            </Heading>
-            <Text color={"gray.500"}>
-              Snippy is a rich coding snippets app that lets you create your own
-              code snippets, categorize them, and even sync them in the cloud so
-              you can use them anywhere. All that is free!
+            <Text as={"span"} color={"blue.400"}>
+              ¿
             </Text>
-            <Stack
-              spacing={{ base: 4, sm: 6 }}
-              direction={{ base: "column", sm: "row" }}
+            Cómo subir archivos
+            <Text as={"span"} color={"blue.400"}>
+              ?
+            </Text>
+          </Heading>
+          {/* inicia */}
+          <Stack
+            align={"center"}
+            spacing={{ base: 8, md: 10 }}
+            py={18}
+            direction={{ base: "column", md: "row" }}
+          >
+            <Stack flex={1} spacing={{ base: 5, md: 10 }}>
+              <Heading
+                lineHeight={1.1}
+                fontWeight={600}
+                fontSize={{ base: "3xl", sm: "4xl", lg: "6xl" }}
+              >
+                <Text
+                  as={"span"}
+                  position={"relative"}
+                  _after={{
+                    content: "''",
+                    width: "full",
+                    height: "30%",
+                    position: "absolute",
+                    bottom: 1,
+                    left: 0,
+                    bg: "red.400",
+                    zIndex: -1,
+                  }}
+                >
+                  Write once,
+                </Text>
+                <br />
+                <Text as={"span"} color={"red.400"}>
+                  use everywhere!
+                </Text>
+              </Heading>
+              <Text color={"gray.500"}>
+                Snippy is a rich coding snippets app that lets you create your
+                own code snippets, categorize them, and even sync them in the
+                cloud so you can use them anywhere. All that is free!
+              </Text>
+              <Stack
+                spacing={{ base: 4, sm: 6 }}
+                direction={{ base: "column", sm: "row" }}
+              >
+                <Button
+                  rounded={"full"}
+                  size={"lg"}
+                  fontWeight={"normal"}
+                  px={6}
+                  colorScheme={"red"}
+                  bg={"red.400"}
+                  _hover={{ bg: "red.500" }}
+                >
+                  Get started
+                </Button>
+                <Button
+                  rounded={"full"}
+                  size={"lg"}
+                  fontWeight={"normal"}
+                  px={6}
+                  leftIcon={<PlayIcon h={4} w={4} color={"gray.300"} />}
+                >
+                  How It Works
+                </Button>
+              </Stack>
+            </Stack>
+            <Flex
+              flex={1}
+              justify={"center"}
+              align={"center"}
+              position={"relative"}
+              w={"full"}
             >
-              <Button
-                rounded={"full"}
-                size={"lg"}
-                fontWeight={"normal"}
-                px={6}
-                colorScheme={"red"}
-                bg={"red.400"}
-                _hover={{ bg: "red.500" }}
+              <Blob
+                w={"150%"}
+                h={"150%"}
+                position={"absolute"}
+                top={"-20%"}
+                left={0}
+                zIndex={-1}
+                color={useColorModeValue("red.50", "red.400")}
+              />
+              <Box
+                position={"relative"}
+                height={"300px"}
+                rounded={"2xl"}
+                boxShadow={"2xl"}
+                width={"full"}
+                overflow={"hidden"}
               >
-                Get started
-              </Button>
-              <Button
-                rounded={"full"}
-                size={"lg"}
-                fontWeight={"normal"}
-                px={6}
-                leftIcon={<PlayIcon h={4} w={4} color={"gray.300"} />}
+                <IconButton
+                  aria-label={"Play Button"}
+                  variant={"ghost"}
+                  _hover={{ bg: "transparent" }}
+                  icon={<PlayIcon w={12} h={12} />}
+                  size={"lg"}
+                  color={"white"}
+                  position={"absolute"}
+                  left={"50%"}
+                  top={"50%"}
+                  transform={"translateX(-50%) translateY(-50%)"}
+                />
+                <Image
+                  alt={"Hero Image"}
+                  fit={"cover"}
+                  align={"center"}
+                  w={"100%"}
+                  h={"100%"}
+                  src={
+                    "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=800&q=80"
+                  }
+                />
+              </Box>
+            </Flex>
+          </Stack>
+          {/* termina */}
+        </Stack>
+
+        {/* another secction DOWNLOAD */}
+        <Stack
+          textAlign={"center"}
+          align={"center"}
+          spacing={8}
+          pt={12}
+          pb={{ base: 28, md: 20 }}
+          id="download"
+          ref={downloadElemet}
+        >
+          <Heading
+            fontWeight={700}
+            fontSize={{ base: "3xl", sm: "4xl", md: "6xl" }}
+            lineHeight={"110%"}
+          >
+            <Text as={"span"} color={"blue.400"}>
+              ¿
+            </Text>
+            Cómo encontrar archivos
+            <Text as={"span"} color={"blue.400"}>
+              ?
+            </Text>
+          </Heading>
+
+          <Stack
+            align={"center"}
+            spacing={{ base: 8, md: 10 }}
+            py={18}
+            direction={{ base: "column-reverse", md: "row" }}
+          >
+            <Flex
+              flex={1}
+              justify={"center"}
+              align={"center"}
+              position={"relative"}
+              w={"full"}
+            >
+              <Blob
+                w={"150%"}
+                h={"150%"}
+                position={"absolute"}
+                top={"-20%"}
+                left={0}
+                zIndex={-1}
+                color={useColorModeValue("red.50", "red.400")}
+              />
+              <Box
+                position={"relative"}
+                height={"300px"}
+                rounded={"2xl"}
+                boxShadow={"2xl"}
+                width={"full"}
+                overflow={"hidden"}
               >
-                How It Works
-              </Button>
+                <IconButton
+                  aria-label={"Play Button"}
+                  variant={"ghost"}
+                  _hover={{ bg: "transparent" }}
+                  icon={<PlayIcon w={12} h={12} />}
+                  size={"lg"}
+                  color={"white"}
+                  position={"absolute"}
+                  left={"50%"}
+                  top={"50%"}
+                  transform={"translateX(-50%) translateY(-50%)"}
+                />
+                <Image
+                  alt={"Hero Image"}
+                  fit={"cover"}
+                  align={"center"}
+                  w={"100%"}
+                  h={"100%"}
+                  src={
+                    "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=800&q=80"
+                  }
+                />
+              </Box>
+            </Flex>
+            <Stack flex={1} spacing={{ base: 5, md: 10 }}>
+              <Heading
+                lineHeight={1.1}
+                fontWeight={600}
+                fontSize={{ base: "3xl", sm: "4xl", lg: "6xl" }}
+              >
+                <Text
+                  as={"span"}
+                  position={"relative"}
+                  _after={{
+                    content: "''",
+                    width: "full",
+                    height: "30%",
+                    position: "absolute",
+                    bottom: 1,
+                    left: 0,
+                    bg: "red.400",
+                    zIndex: -1,
+                  }}
+                >
+                  Write once,
+                </Text>
+                <br />
+                <Text as={"span"} color={"red.400"}>
+                  use everywhere!
+                </Text>
+              </Heading>
+              <Text color={"gray.500"}>
+                Snippy is a rich coding snippets app that lets you create your
+                own code snippets, categorize them, and even sync them in the
+                cloud so you can use them anywhere. All that is free!
+              </Text>
+              <Stack
+                spacing={{ base: 4, sm: 6 }}
+                direction={{ base: "column", sm: "row" }}
+              >
+                <Button
+                  rounded={"full"}
+                  size={"lg"}
+                  fontWeight={"normal"}
+                  px={6}
+                  colorScheme={"red"}
+                  bg={"red.400"}
+                  _hover={{ bg: "red.500" }}
+                >
+                  Get started
+                </Button>
+                <Button
+                  rounded={"full"}
+                  size={"lg"}
+                  fontWeight={"normal"}
+                  px={6}
+                  leftIcon={<PlayIcon h={4} w={4} color={"gray.300"} />}
+                >
+                  How It Works
+                </Button>
+              </Stack>
             </Stack>
           </Stack>
         </Stack>
-      </Stack>
-    </Container>
+      </Container>
+    </>
   );
 }
 

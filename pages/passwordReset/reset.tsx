@@ -18,6 +18,15 @@ import { GetServerSideProps } from "next";
 import { ParsedUrlQuery } from "querystring";
 import { useResetPass } from "../../hooks/useFetch";
 import { useRouter } from "next/router";
+import OwnHead from "../../components/OwnHead";
+
+const SEO = {
+  title: "Reestablece contraseña — Subetuarchivo ",
+  description:
+    "Reestablece tu contraseña para volver a acceder a tu cuenta en subetuarchivo",
+  url: "/users/reset-password",
+  imgName: "login.png",
+};
 
 type ITypeParam = "password" | "password2";
 
@@ -103,76 +112,87 @@ export default function ResetPassword({ data, status }: IRes): JSX.Element {
   }, [dataRes, error]);
 
   return (
-    <Flex minH={"100vh"} align={"center"} justify={"center"}>
-      <Stack
-        spacing={4}
-        w={"full"}
-        maxW={"sm"}
-        bg={useColorModeValue("white", "gray.700")}
-        rounded={"xl"}
-        boxShadow={"lg"}
-        p={6}
-        my={12}
-      >
-        <Heading lineHeight={1.1} fontSize={{ base: "2xl", md: "3xl" }}>
-          Nueva contraseña
-        </Heading>
-        <FormControl
-          id="password"
-          isRequired
-          isInvalid={form.password !== form.password2}
-        >
-          <FormLabel>Contraseña</FormLabel>
-          <InputGroup>
-            <Input
-              type={showPassword ? "text" : "password"}
-              value={form.password}
-              onChange={(e) => handleInputChange(e, "password")}
-            />
-            <InputRightElement h={"full"}>
-              <Button
-                variant={"ghost"}
-                onClick={() => setShowPassword((showPassword) => !showPassword)}
-              >
-                {showPassword ? <ViewIcon /> : <ViewOffIcon />}
-              </Button>
-            </InputRightElement>
-          </InputGroup>
-        </FormControl>
+    <>
+      <OwnHead
+        title={SEO.title}
+        description={SEO.description}
+        imgName={SEO.imgName}
+        url={SEO.url}
+      />
 
-        <FormControl
-          id="password2"
-          isRequired
-          isInvalid={form.password !== form.password2}
+      <Flex minH={"100vh"} align={"center"} justify={"center"}>
+        <Stack
+          spacing={4}
+          w={"full"}
+          maxW={"sm"}
+          bg={useColorModeValue("white", "gray.700")}
+          rounded={"xl"}
+          boxShadow={"lg"}
+          p={6}
+          my={12}
         >
-          <FormLabel>Confirma contraseña</FormLabel>
-          <Input
-            type="password"
-            value={form.password2}
-            onChange={(e) => handleInputChange(e, "password2")}
-          />
-          {form.password !== form.password2 && (
-            <FormHelperText color="red.400" fontSize="xs">
-              Las contraseñas no coinciden
-            </FormHelperText>
-          )}
-        </FormControl>
-        <Stack spacing={6}>
-          <Button
-            bg={"blue.400"}
-            color={"white"}
-            _hover={{
-              bg: "blue.500",
-            }}
-            isLoading={loading}
-            isDisabled={!isOkButton || loading}
-            onClick={handleClick}
+          <Heading lineHeight={1.1} fontSize={{ base: "2xl", md: "3xl" }}>
+            Nueva contraseña
+          </Heading>
+          <FormControl
+            id="password"
+            isRequired
+            isInvalid={form.password !== form.password2}
           >
-            Reestablecer
-          </Button>
+            <FormLabel>Contraseña</FormLabel>
+            <InputGroup>
+              <Input
+                type={showPassword ? "text" : "password"}
+                value={form.password}
+                onChange={(e) => handleInputChange(e, "password")}
+              />
+              <InputRightElement h={"full"}>
+                <Button
+                  variant={"ghost"}
+                  onClick={() =>
+                    setShowPassword((showPassword) => !showPassword)
+                  }
+                >
+                  {showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                </Button>
+              </InputRightElement>
+            </InputGroup>
+          </FormControl>
+
+          <FormControl
+            id="password2"
+            isRequired
+            isInvalid={form.password !== form.password2}
+          >
+            <FormLabel>Confirma contraseña</FormLabel>
+            <Input
+              type="password"
+              value={form.password2}
+              onChange={(e) => handleInputChange(e, "password2")}
+            />
+            {form.password !== form.password2 && (
+              <FormHelperText color="red.400" fontSize="xs">
+                Las contraseñas no coinciden
+              </FormHelperText>
+            )}
+          </FormControl>
+          <Stack spacing={6}>
+            <Button
+              bg={"blue.400"}
+              color={"white"}
+              _hover={{
+                bg: "blue.500",
+              }}
+              isLoading={loading}
+              isDisabled={!isOkButton || loading}
+              onClick={handleClick}
+            >
+              Reestablecer
+            </Button>
+          </Stack>
         </Stack>
-      </Stack>
-    </Flex>
+      </Flex>
+    </>
   );
 }
 
