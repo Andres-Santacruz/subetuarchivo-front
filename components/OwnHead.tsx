@@ -12,7 +12,7 @@ const OwnHead = ({title, description, url, imgName}: IPropsOwnHead) => {
   return (
     <Head>
       {/* <!-- Primary Meta Tags --> */}
-      <title>Subetuarchivo — Comparte tus archivos</title>
+      <title>{title}</title>
       <meta name="title" content={title} />
       <meta name="description" content={description} />
 
