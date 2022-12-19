@@ -31,12 +31,12 @@ import { useAuth } from "../hooks/useAuth";
 import { getTimeNumber, numberFormaTime } from "../helpers";
 
 interface IPropContent {
-  setConfig: Dispatch<SetStateAction<IConfig>>;
+  setConfig: Dispatch<SetStateAction<IConfig | undefined>>;
   onClose: () => void;
   config: {
     password?: string;
     time?: number;
-  };
+  } | undefined;
 }
 
 interface IForm {
@@ -53,9 +53,9 @@ const ContentConfigFile = ({ setConfig, onClose, config }: IPropContent) => {
   const { user } = useAuth();
 
   const [form, setForm] = useState<IForm>({
-    password: config.password || "",
-    numberTime: config.time ? getTimeNumber(Number(config.time)).getTime : "",
-    select: config.time ? getTimeNumber(Number(config.time)).getFormat : "",
+    password: config?.password || "",
+    numberTime: config?.time ? getTimeNumber(Number(config.time)).getTime : "",
+    select: config?.time ? getTimeNumber(Number(config.time)).getFormat : "",
   });
 
   const [errorForm, setErrorForm] = useState({

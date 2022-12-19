@@ -9,7 +9,7 @@ type IConfig = {
   password?: string;
   time?: number;
 };
-export const IconSetting = ({ config }: { config: IConfig }) => {
+export const IconSetting = ({ config }: { config: IConfig | undefined}) => {
   const prefersReducedMotion = usePrefersReducedMotion();
 
   const animation = prefersReducedMotion

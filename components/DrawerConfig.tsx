@@ -11,11 +11,11 @@ interface IDrawerConfig {
   onClose: () => void;
   isOpen: boolean;
   btnRef: MutableRefObject<null>;
-  setConfig: Dispatch<SetStateAction<IConfig>>;
+  setConfig: Dispatch<SetStateAction<IConfig | undefined>>;
   config: {
     password?: string;
     time?: number;
-  };
+  } | undefined;
 }
 
 export const DrawerConfig = ({

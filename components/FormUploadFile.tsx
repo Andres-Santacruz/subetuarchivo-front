@@ -116,7 +116,7 @@ export const FormUploadFile = ({
   const [keyAcorrdination, setKeyAcorrdination] = useState<string>("key1");
 
   // para cambiar
-  const [config, setConfig] = useState<IConfig>({});
+  const [config, setConfig] = useState<IConfig>();
 
   const [isOkButton, setIsOkButton] = useState(false);
 
@@ -280,7 +280,6 @@ export const FormUploadFile = ({
           <Input
             type="email"
             value={email}
-            maxLength={4}
             onChange={(e) => setEmail(e.target.value)}
           />
           {!user && (
