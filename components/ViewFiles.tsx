@@ -81,7 +81,7 @@ const ViewFiles = ({ urlFile, nameFile, setUrlFile, setNameFile, FILES }: IPropV
             >
               Descargar
             </Button>
-            <Button
+{/*             <Button
               marginTop={8}
               bg={"blue.400"}
               color={"white"}
@@ -92,7 +92,7 @@ const ViewFiles = ({ urlFile, nameFile, setUrlFile, setNameFile, FILES }: IPropV
               variant="outline"
             >
               Imprimir
-            </Button>
+            </Button> */}
           </Stack>
         </Stack>
         <Stack

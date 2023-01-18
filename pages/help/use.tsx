@@ -55,9 +55,10 @@ export default function HoeToUse() {
             </Text>
           </Heading>
           <Text color={"gray.500"} maxW={"3xl"}>
-            Never miss a meeting. Never be late for one too. Keep track of your
-            meetings and receive smart reminders in appropriate times. Read your
-            smart “Daily Agenda” every morning.
+            En Subetuarchivo, te ofrecemos una forma sencilla y segura de
+            compartir y acceder a tus archivos desde cualquier lugar. A
+            continuación, te presentamos un paso a paso para que puedas subir y ver tus
+            archivos de manera rápida y sencilla.
           </Text>
           <Stack spacing={6} direction={"row"}>
             <Button
@@ -138,17 +139,27 @@ export default function HoeToUse() {
                     zIndex: -1,
                   }}
                 >
-                  Write once,
+                  Facil,
                 </Text>
                 <br />
                 <Text as={"span"} color={"red.400"}>
-                  use everywhere!
+                  rápido y seguro!
                 </Text>
               </Heading>
               <Text color={"gray.500"}>
-                Snippy is a rich coding snippets app that lets you create your
-                own code snippets, categorize them, and even sync them in the
-                cloud so you can use them anywhere. All that is free!
+                Ingresa tu correo electrónico en el campo correspondiente.
+                Selecciona el archivo que deseas subir utilizando el botón
+                &quot;Examinar&quot; o &quot;Seleccionar archivo&quot;. Acepta
+                los términos y condiciones de nuestra plataforma haciendo clic
+                en el botón &quot;Aceptar&quot;. (Opcional) Si deseas añadir
+                configuraciones adicionales a tu archivo antes de subirlo,
+                utiliza las opciones disponibles en la plataforma. Ingresa el
+                código OTP que te llegó al correo electrónico en el campo
+                correspondiente. Haz clic en el botón &quot;Subir archivo&quot;
+                para finalizar el proceso. Guarda el código de tu archivo para
+                acceder a él en el futuro. Es importante guardar el código ya
+                que es la forma en la que puedes acceder y compartir tu archivo
+                en el futuro.
               </Text>
               <Stack
                 spacing={{ base: 4, sm: 6 }}
@@ -326,17 +337,22 @@ export default function HoeToUse() {
                     zIndex: -1,
                   }}
                 >
-                  Write once,
+                  Facil,
                 </Text>
                 <br />
                 <Text as={"span"} color={"red.400"}>
-                  use everywhere!
+                  con tu código!
                 </Text>
               </Heading>
               <Text color={"gray.500"}>
-                Snippy is a rich coding snippets app that lets you create your
-                own code snippets, categorize them, and even sync them in the
-                cloud so you can use them anywhere. All that is free!
+                Ingresa el código de 6 caracteres del archivo que deseas ver en
+                el campo correspondiente. Si el archivo está libre, ya podrás
+                verlo en la plataforma. Si el archivo está protegido por una
+                contraseña, ingresa la contraseña en el campo correspondiente.
+                Haz clic en el botón &quot;Ver archivo&quot; para acceder al
+                contenido del archivo. Con estos sencillos pasos ya podrás ver
+                el archivo que deseas. Ten en cuenta que el proceso puede variar
+                dependiendo de la configuración de la plataforma.
               </Text>
               <Stack
                 spacing={{ base: 4, sm: 6 }}

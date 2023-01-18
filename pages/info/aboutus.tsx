@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 
 import { ReactElement } from "react";
-import { InfoIcon, Search2Icon, StarIcon } from "@chakra-ui/icons";
+import { InfoIcon, WarningTwoIcon, StarIcon } from "@chakra-ui/icons";
 import OwnHead from "../../components/OwnHead";
 
 const SEO = {
@@ -69,12 +69,31 @@ export default function SplitWithImage() {
               alignSelf={"flex-start"}
               rounded={"md"}
             >
-              Our Story
+              Nostros
             </Text>
-            <Heading>A digital Product design agency</Heading>
+            <Heading>SubeTuArchivo</Heading>
             <Text color={"gray.500"} fontSize={"lg"}>
-              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-              nonumy eirmod tempor invidunt ut labore
+              Bienvenido a nuestra empresa, somos un equipo de desarrolladores
+              apasionados que se dedican a crear soluciones innovadoras para
+              mejorar la forma en que compartimos y accedemos a la información.
+            </Text>
+            <Text color={"gray.500"} fontSize={"lg"}>
+              Nuestro producto estrella es Subetuarchivo, una plataforma de
+              compartición de archivos segura y fácil de usar que permite a los
+              usuarios compartir y acceder a sus archivos desde cualquier lugar.
+            </Text>
+            Subetuarchivo está diseñada para ser intuitiva y fácil de usar, con
+            un enfoque en la privacidad y la seguridad de los datos de nuestros
+            usuarios. Nos esforzamos por ofrecer la mejor experiencia posible a
+            nuestros clientes, y estamos comprometidos con el desarrollo
+            continuo de nuestra plataforma para adaptarnos a las necesidades
+            cambiantes de nuestros usuarios.
+            <Text color={"gray.500"} fontSize={"lg"}>
+              Estamos emocionados de ofrecer nuestra solución Subetuarchivo a
+              individuos y empresas de todo el mundo, y esperamos trabajar
+              juntos para mejorar la forma en que compartimos y accedemos a la
+              información. ¡Gracias por visitar nuestra página y esperamos
+              conectarnos pronto
             </Text>
             <Stack
               spacing={4}
@@ -87,19 +106,19 @@ export default function SplitWithImage() {
               <Feature
                 icon={<Icon as={InfoIcon} color={"yellow.500"} w={5} h={5} />}
                 iconBg={useColorModeValue("yellow.100", "yellow.900")}
-                text={"Business Planning"}
+                text={"Innovación"}
               />
               <Feature
                 icon={<Icon as={StarIcon} color={"green.500"} w={5} h={5} />}
                 iconBg={useColorModeValue("green.100", "green.900")}
-                text={"Financial Planning"}
+                text={"Desarrollo"}
               />
               <Feature
                 icon={
-                  <Icon as={Search2Icon} color={"purple.500"} w={5} h={5} />
+                  <Icon as={WarningTwoIcon} color={"purple.500"} w={5} h={5} />
                 }
                 iconBg={useColorModeValue("purple.100", "purple.900")}
-                text={"Market Analysis"}
+                text={"Seguridad"}
               />
             </Stack>
           </Stack>
