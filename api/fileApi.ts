@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // const baseURL = "http://localhost:3001/api"
-const baseURL = "https://subetuarchivo.onrender.com/api";
+const baseURL = "https://subetuarchivo-production.up.railway.app/api";
 
 const axiosApi = axios.create({ baseURL });
 

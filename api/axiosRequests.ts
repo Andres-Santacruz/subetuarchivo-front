@@ -77,13 +77,13 @@ export const axiosUseRegister = async ({
   email,
   password,
   name,
-  surname
+  surname,
 }: IPropsRegister) => {
   const { data } = await axiosApi.post<IResLogin>("/register", {
     email,
     password,
     name,
-    surname
+    surname,
   });
 
   return { ...data };
@@ -97,11 +97,13 @@ export const axiosUseGetFile = async (code: string) => {
   return { ...data };
 };
 
-export const axiosUseGetFileProtected = async (code: string, password: string) => {
-  
+export const axiosUseGetFileProtected = async (
+  code: string,
+  password: string
+) => {
   const { data } = await axiosApi.post<IResGetFile>("/getfile", {
     code,
-    password
+    password,
   });
 
   return { ...data };
@@ -120,17 +122,17 @@ export const axiosUseUploadFile = async ({
   email,
   files,
   password,
-  time
+  time,
 }: IPropsUpload) => {
   const formData = new FormData();
   formData.append("email", email);
   formData.append("otpVerify", otpVerify);
-  
+
   files.forEach((file, index) => {
     formData.append(`file${index}`, file);
   });
-  
-  if(password){
+
+  if (password) {
     formData.append("password", password);
   }
   if (time) {
@@ -146,7 +148,7 @@ export const axiosUseUploadFile = async ({
   return { ...data };
 };
 
-export const axiosGenLinkResetPass = async (email: string)=>{
+export const axiosGenLinkResetPass = async (email: string) => {
   const { data } = await axiosApi.post<IResGenLink>(
     "/generate-reset-password",
     {
@@ -154,15 +156,19 @@ export const axiosGenLinkResetPass = async (email: string)=>{
     }
   );
 
-  return {...data}
-}
+  return { ...data };
+};
 
-export const axiosResetPassword = async ({token, userId, password }:IParamResetPass) => {
-  const {data} = await axiosApi.post<IResResetPass>("/reset", {
+export const axiosResetPassword = async ({
+  token,
+  userId,
+  password,
+}: IParamResetPass) => {
+  const { data } = await axiosApi.post<IResResetPass>("/reset", {
     token,
     userId,
-    password
+    password,
   });
 
-  return { ...data}
-}
+  return { ...data };
+};
