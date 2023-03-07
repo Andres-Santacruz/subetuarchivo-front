@@ -12,6 +12,8 @@ import {
   createIcon,
   IconProps,
   useColorModeValue,
+  ListItem,
+  List,
 } from "@chakra-ui/react";
 import Lottie from "lottie-react";
 import notFound from "../../public/assets/imgs/lotties/howuse.json";
@@ -57,8 +59,8 @@ export default function HoeToUse() {
           <Text color={"gray.500"} maxW={"3xl"}>
             En Subetuarchivo, te ofrecemos una forma sencilla y segura de
             compartir y acceder a tus archivos desde cualquier lugar. A
-            continuación, te presentamos un paso a paso para que puedas subir y ver tus
-            archivos de manera rápida y sencilla.
+            continuación, te presentamos un paso a paso para que puedas subir y
+            ver tus archivos de manera rápida y sencilla.
           </Text>
           <Stack spacing={6} direction={"row"}>
             <Button
@@ -146,21 +148,37 @@ export default function HoeToUse() {
                   rápido y seguro!
                 </Text>
               </Heading>
-              <Text color={"gray.500"}>
-                Ingresa tu correo electrónico en el campo correspondiente.
-                Selecciona el archivo que deseas subir utilizando el botón
-                &quot;Examinar&quot; o &quot;Seleccionar archivo&quot;. Acepta
-                los términos y condiciones de nuestra plataforma haciendo clic
-                en el botón &quot;Aceptar&quot;. (Opcional) Si deseas añadir
-                configuraciones adicionales a tu archivo antes de subirlo,
-                utiliza las opciones disponibles en la plataforma. Ingresa el
-                código OTP que te llegó al correo electrónico en el campo
-                correspondiente. Haz clic en el botón &quot;Subir archivo&quot;
-                para finalizar el proceso. Guarda el código de tu archivo para
-                acceder a él en el futuro. Es importante guardar el código ya
-                que es la forma en la que puedes acceder y compartir tu archivo
-                en el futuro.
-              </Text>
+              <List spacing={2}>
+                <ListItem>
+                  Ingresa tu correo electrónico en el campo correspondiente.
+                </ListItem>
+                <ListItem>
+                  Selecciona el archivo que deseas subir utilizando el botón
+                  &quot;Examinar&quot; o &quot;Seleccionar archivo.&quot;
+                </ListItem>
+                <ListItem>
+                  Acepta los términos y condiciones de nuestra plataforma
+                  haciendo clic en el botón &quot;Aceptar.&quot;
+                </ListItem>
+                <ListItem>
+                  Si deseas añadir configuraciones adicionales a tu archivo
+                  antes de subirlo, utiliza las opciones disponibles en la
+                  plataforma.
+                </ListItem>
+                <ListItem>
+                  Ingresa el código OTP que te llegó al correo electrónico en el
+                  campo correspondiente.
+                </ListItem>
+                <ListItem>
+                  Haz clic en el botón &quot;Subir archivo&quot; para finalizar
+                  el proceso.
+                </ListItem>
+                <ListItem>
+                  Guarda el código de tu archivo para acceder a él en el futuro.
+                  Es importante guardar el código ya que es la forma en la que
+                  puedes acceder y compartir tu archivo en el futuro.
+                </ListItem>
+              </List>
               <Stack
                 spacing={{ base: 4, sm: 6 }}
                 direction={{ base: "column", sm: "row" }}
