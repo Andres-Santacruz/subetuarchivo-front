@@ -1,4 +1,4 @@
-import { useMutation } from "@apollo/client";
+// import { useMutation } from "@apollo/client";
 import {
   Box,
   Button,
@@ -14,10 +14,10 @@ import {
   Text,
   useToast,
 } from "@chakra-ui/react";
-import React, { SetStateAction, useEffect, useState } from "react";
-import { VERIFY_OTP } from "../constant/graphql/mutations";
+import React, { SetStateAction, useState } from "react";
+/* import { VERIFY_OTP } from "../constant/graphql/mutations";
 import { IResponseVerify } from "../constant/types/interfaces";
-import { useUploadFile } from "../hooks/useFetch";
+import { useUploadFile } from "../hooks/useFetch"; */
 
 interface PropsModal {
   isOpen: boolean;
@@ -34,8 +34,7 @@ const ModalConfirmOTP = ({
   onUpFile,
   email,
 }: PropsModal) => {
-
- /*  const [verifyOTP, { data, error, loading }] =
+  /*  const [verifyOTP, { data, error, loading }] =
     useMutation<IResponseVerify>(VERIFY_OTP); */
   // const [uploadFile, {data, error, loading}] = useUploadFile();
   const toast = useToast();

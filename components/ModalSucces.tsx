@@ -59,8 +59,10 @@ const ModalSucces = ({
             )}
           </Box>
         </ModalBody>
-        <ModalFooter>
-          <Button variant="ghost">Aceptar</Button>
+        <ModalFooter display="flex" alignItems="center" gap={2}>
+          <Button variant="ghost" onClick={() => setIsModalOpenSucces(false)}>
+            Aceptar
+          </Button>
           <Button
             colorScheme="blue"
             mr={3}
