@@ -1,9 +1,10 @@
 import axios from "axios";
 
 // const baseURL = "http://localhost:3001/api"
+export const URL = "https://subetuarchivo-dev-mnsz.3.us-1.fl0.io";
 const baseURL =
   process.env.NODE_ENV === "production"
-    ? "https://subetuarchivo-fhnr-dev.fl0.io/api"
+    ? `${URL}/api`
     : "http://localhost:3001/api";
 
 const axiosApi = axios.create({ baseURL });
